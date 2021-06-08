@@ -16,5 +16,15 @@ namespace DAL.Helper
             tam += "...";
             return tam;
         }
+        public static string ChuanHoa(string xau,int kitu)
+        {
+            string[] a = xau.Split(new string[] { " ","-" }, StringSplitOptions.None);
+            if (a.Length < kitu) return xau;
+            string tam = "";
+            for (int i = 0; i < kitu; i++)
+                tam += a[i] + " ";
+            tam += "...";
+            return tam;
+        }
     }
 }

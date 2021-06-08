@@ -23,10 +23,6 @@ namespace WebCamera_API.Admin
             _camerabusiness = ICamera;
             _path = configuration["AppSettings:PATH"];
         }
-        //public CameraController()
-        //{
-        //    _path = configuration["AppSettings:PATH"];
-        //}
 
         [Route("get-camera/{Pageindex}/{Pagesize}")]
         [HttpGet]

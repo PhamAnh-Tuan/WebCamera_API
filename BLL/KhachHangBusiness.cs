@@ -18,5 +18,9 @@ namespace BLL
         {
             return _res.Login(KhachHang);
         }
+        public bool Register(KhachHang kh)
+        {
+            return _res.Register(kh);
+        }
     }
 }

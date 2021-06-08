@@ -25,5 +25,11 @@ namespace WebCamera_API.Controllers
         {
             return _userbusiness.Login(KhachHang);
         }
+        [Route("register")]
+        [HttpPost]
+        public bool Register(KhachHang kh)
+        {
+            return _userbusiness.Register(kh);
+        }
     }
 }

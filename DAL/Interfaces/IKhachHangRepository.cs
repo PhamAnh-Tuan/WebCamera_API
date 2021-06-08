@@ -8,5 +8,6 @@ namespace DAL.Interfaces
     public partial interface IKhachHangRepository
     {
         KhachHang Login(KhachHang KhachHang);
+        bool Register(KhachHang kh);
     }
 }

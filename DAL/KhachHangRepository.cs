@@ -41,5 +41,33 @@ namespace DAL
             }
             return user;
         }
+        public bool Register(KhachHang kh)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(dbconnectionStr))
+                {
+                    string sql = "Register";
+                    using (SqlCommand cmd = new SqlCommand(sql, connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@TenKhachHang", kh.TenKhachHang);
+                        cmd.Parameters.AddWithValue("@Email", kh.Email);
+                        cmd.Parameters.AddWithValue("@MatKhau", kh.MatKhau);
+                        cmd.Parameters.AddWithValue("@GioiTinh", kh.GioiTinh);
+                        cmd.Parameters.AddWithValue("@SDT", kh.SDT);
+                        cmd.Parameters.AddWithValue("@DiaChi", kh.DiaChi);
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
