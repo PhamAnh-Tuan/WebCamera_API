@@ -19,7 +19,7 @@ app.controller('myCtrl', function ($scope, $http, $location) {
                         $scope.totalcount = response.data.totalcount;
 
                 }, function (error) {
-                        alert('failed');
+                        alert('Có lỗi xảy ra');
                 });
         }
         $scope.HangSXLisst();
@@ -39,10 +39,10 @@ app.controller('myCtrl', function ($scope, $http, $location) {
                                 $scope.listhang = response.data.listHang;
                                 $scope.totalcount = response.data.totalcount;
                         }, function (error) {
-                                alert('Failed');
+                                alert('Có lỗi xảy ra');
                         });
                 }, function (error) {
-                        alert('Failed');
+                        alert('Có lỗi xảy ra');
                 });
 
         };
@@ -69,7 +69,7 @@ app.controller('edit', function ($scope, $http, $location) {
                 $("#TenHang1").val(d.data.tenHang);
                 $("#ThongTin1").val(d.data.thongTin);
         }, function (error) {
-                alert('Failed');
+                alert('Có lỗi xảy ra');
         });
 
         $scope.update = function () {
@@ -110,7 +110,7 @@ app.controller('loaicamera', function ($scope, $http) {
                         $scope.totalcount = response.data.totalcount;
 
                 }, function (error) {
-                        alert('failed');
+                        alert('Có lỗi xảy ra');
                 });
         }
         $scope.LoaiLisst();
@@ -131,10 +131,10 @@ app.controller('loaicamera', function ($scope, $http) {
                                 $scope.listLoai = response.data.listLoai;
                                 $scope.totalcount = response.data.totalcount;
                         }, function (error) {
-                                alert('Failed');
+                                alert('Có lỗi xảy ra');
                         });
                 }, function (error) {
-                        alert('Failed');
+                        alert('Có lỗi xảy ra');
                 });
 
         };
@@ -152,7 +152,6 @@ app.controller('loaicamera', function ($scope, $http) {
                         url: current_url + 'LoaiCamera/create-loai',
                         data: formdata
                 }).then(function (response) {
-                        //console.log(response)
                         alert('Thêm thành công..');
                         window.location.href = 'loai-index.html';
                 }, function () {
@@ -163,22 +162,21 @@ app.controller('loaicamera', function ($scope, $http) {
         //
         $http.get(current_url + "HangSanXuat/get-all").then(function (response) {
                 $scope.listhang = response.data;
-
         }, function (error) {
-                alert('failed');
+                alert('Có lỗi xảy ra');
         });
 });
 app.controller('edit-loai', function ($scope, $http, $location) {
         $http.get(current_url + "LoaiCamera/get-byid-loai/" + $location.search().MaLoai).then(function (d) {
                 $scope.loai = d.data;
         }, function (error) {
-                alert('Failed');
+                alert('Có lỗi xảy ra');
         });
         $http.get(current_url + "HangSanXuat/get-all").then(function (response) {
                 $scope.listhang = response.data;
 
         }, function (error) {
-                alert('failed');
+                alert('Có lỗi xảy ra');
         });
         $scope.update = function () {
                 $http({
@@ -216,7 +214,7 @@ app.controller('camera', function ($scope, $http, $location) {
                         $scope.totalcount = response.data.totalcount;
 
                 }, function (error) {
-                        alert('failed');
+                        alert('Có lỗi xảy ra');
                 });
         }
         $scope.LoaiLisst();
@@ -237,10 +235,10 @@ app.controller('camera', function ($scope, $http, $location) {
                                 $scope.listCamera = response.data.listCamera;
                                 $scope.totalcount = response.data.totalcount;
                         }, function (error) {
-                                alert('Failed');
+                                alert('Có lỗi xảy ra');
                         });
                 }, function (error) {
-                        alert('Failed');
+                        alert('Có lỗi xảy ra');
                 });
 
         };
@@ -261,10 +259,10 @@ app.controller('camera', function ($scope, $http, $location) {
                 $scope.listmenu = response.data;
                 $scope.listmenuHang = removeDumplicateValue(response.data);
         }, function (error) {
-                alert('failed');
+                alert('Có lỗi xảy ra');
         });
         var html = "";
-        var dd = "---";
+        var dd = "|---";
         $http.get(current_url + "HangSanXuat/get-all").then(function (response) {
                 var data = response.data;
                 // 
@@ -280,16 +278,15 @@ app.controller('camera', function ($scope, $http, $location) {
 
                 $("#selectma").html(html)
                 console.log(html)
-
         }, function (error) {
-                alert('failed');
+                alert('Có lỗi xảy ra');
         });
 
         function childmenu(data, j) {
-                var idChildMenu = []; // reset sau mỗi lần lặp
-                var nameChildMenu = []; // reset sau mỗi lần lặp
+                var idChildMenu = [];
+                var nameChildMenu = []; 
                 for (var i = 0; i < data.length; i++) {
-                        if (data[i].parent_MaHang == j) {
+                        if (data[i].maHang == j) {
                                 idChildMenu.push(data[i].maLoai);
                                 nameChildMenu.push(data[i].tenLoai);
                         }
@@ -298,15 +295,12 @@ app.controller('camera', function ($scope, $http, $location) {
                 if (idChildMenu.length > 0) {
                         if (idChildMenu.length > 0) {
                                 for (var k = 0; k < idChildMenu.length; k++) {
-                                        // dd += "---";
                                         var a = idChildMenu[k];
                                         html += `<option value="${a}">`;
                                         html += dd;
                                         html += nameChildMenu[k];
                                         html += "</option>";
-
                                 }
-
                         }
                 }
                 else {
@@ -379,14 +373,14 @@ app.controller('edit-camera', function ($scope, $http, $location) {
                 $scope.camera = d.data;
                 console.log($scope.camera);
         }, function (error) {
-                alert('Failed');
+                alert('Có lỗi xảy ra');
         });
 
         $http.get(current_url + "LoaiCamera/get-menu").then(function (response) {
                 $scope.listmenu = response.data;
                 $scope.listmenuHang = removeDumplicateValue(response.data);
         }, function (error) {
-                alert('failed');
+                alert('Có lỗi xảy ra');
         });
 
         var html = "";
@@ -410,7 +404,7 @@ app.controller('edit-camera', function ($scope, $http, $location) {
                 console.log(html)
 
         }, function (error) {
-                alert('failed');
+                alert('Có lỗi xảy ra');
         });
 
         function childmenu(data, j) {
@@ -448,7 +442,7 @@ app.controller('edit-camera', function ($scope, $http, $location) {
                 for (var i = 0; i < image.length; i++) {
                         images_names = image[image.length - 1];
                 }
-                
+
                 var file = document.getElementById('file-img').files[0];
                 if (file) {
                         const formData = new FormData();
@@ -525,7 +519,7 @@ app.controller('nhacungcap', function ($scope, $http, $location) {
                         console.log(listncc);
 
                 }, function (error) {
-                        alert('failed');
+                        alert('Có lỗi xảy ra');
                 });
         }
         $scope.NCCList();
@@ -546,10 +540,10 @@ app.controller('nhacungcap', function ($scope, $http, $location) {
                                 $scope.totalcount = response.data.totalcount;
                                 console.log(listncc);
                         }, function (error) {
-                                alert('failed');
+                                alert('Có lỗi xảy ra');
                         });
                 }, function (error) {
-                        alert('Failed');
+                        alert('Có lỗi xảy ra');
                 });
 
         };
@@ -572,7 +566,7 @@ app.controller('edit-nhacungcap', function ($scope, $http, $location) {
                 $scope.ncc = d.data;
                 console.log($scope.ncc);
         }, function (error) {
-                alert('Failed');
+                alert('Có lỗi xảy ra');
         });
 
         $scope.update = function () {
@@ -580,11 +574,11 @@ app.controller('edit-nhacungcap', function ($scope, $http, $location) {
                         method: 'POST',
                         url: current_url + 'NhaCungCap/update-ncc',
                         data: {
-                                "MaNCC":~~$scope.ncc.maNCC,
-                                "TenNCC":$scope.ncc.tenNCC,
-                                "DiaChi":$scope.ncc.diaChi,
-                                "SDT":$scope.ncc.sdt,
-                                "Email":$scope.ncc.email
+                                "MaNCC": ~~$scope.ncc.maNCC,
+                                "TenNCC": $scope.ncc.tenNCC,
+                                "DiaChi": $scope.ncc.diaChi,
+                                "SDT": $scope.ncc.sdt,
+                                "Email": $scope.ncc.email
                         }
                 }).then(function (d) {
                         alert("Cập nhật thành công");
@@ -595,7 +589,239 @@ app.controller('edit-nhacungcap', function ($scope, $http, $location) {
 
         }
 });
+app.controller('hoadonnhap', function ($scope, $http, $location) {
+        $scope.maxsize = 5;
 
+        $scope.totalcount = 0;
+
+        $scope.pageIndex = 1;
+
+        $scope.pageSize = 5;
+
+        $scope.searchText = '';
+        //----------------------------------------------------------------------------------------------------------------
+        $scope.NCCList = function () {
+                $http.get(current_url + "HoaDonNhap/get-hoadonnhap/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                        $scope.listhdn = response.data.listHoaDonNhap;
+                        $scope.totalcount = response.data.totalcount;
+                        // console.log(response.data);
+
+                }, function (error) {
+                        alert('Có lỗi xảy ra');
+                });
+        }
+        $scope.NCCList();
+        $scope.pagechanged = function () {
+                $scope.NCCList();
+
+        }
+        $scope.changePageSize = function () {
+                $scope.pageIndex = 1;
+                $scope.NCCList();
+        }
+        //
+        $scope.delete = function (id) {
+                $http.get(current_url + "NhaCungCap/delete-ncc/" + id).then(function (d) {
+                        alert('xóa thành công');
+                        $http.get(current_url + "NhaCungCap/get-ncc/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                                $scope.listncc = response.data.listNCC;
+                                $scope.totalcount = response.data.totalcount;
+                                console.log(listncc);
+                        }, function (error) {
+                                alert('Có lỗi xảy ra');
+                        });
+                }, function (error) {
+                        alert('Có lỗi xảy ra');
+                });
+
+        };
+        $http.get(current_url + "Camera/get-all").then(function (response) {
+                $scope.listCamera = response.data;
+                console.log($scope.listCamera);
+        }, function (error) {
+                alert('Có lỗi xảy ra');
+        });
+        $http.get(current_url + "NhaCungCap/get-all").then(function (response) {
+                $scope.listncc = response.data;
+                console.log($scope.listncc);
+        }, function (error) {
+                alert('Có lỗi xảy ra');
+        });
+        $scope.save = function () {
+                var date=new Date();
+                var month=date.getMonth()+1;
+                var id='MHD'+ Math.floor(Math.random() * 1000000)+'/'+ month +'-'+date.getDate()+'-'+date.getFullYear();
+                localStorage.setItem('mahdn',id);
+                $http({
+                        method: 'POST',
+                        data: {
+                                "MaHoaDonNhap":id,
+                                "MaNCC":~~$scope.mancc,
+                                "NgayNhap":$scope.ngaynhap,
+                                "TongTien":~~$scope.tongtien
+                        },
+                        url: current_url + 'HoaDonNhap/create-hoadonnhap'
+                }).then(function (d) {
+                        alert("Thêm thành công");
+                        window.location.href = 'hoadonnhap-index.html'
+                }, function (e) {
+                        console.log(e);
+                });
+        }
+        $scope.savedetail = function () {
+                $http({
+                        method: 'POST',
+                        data: $scope.ncc,
+                        url: current_url + 'HoaDonNhap/create-cthoadonnhap'
+                }).then(function (d) {
+                        alert("Thêm thành công");
+                        window.location.href = 'hoadonnhap-index.html'
+                }, function (e) {
+                        console.log(e);
+                });
+        }
+});
+app.controller('donhang', function ($scope, $http, $location) {
+        $scope.maxsize = 5;
+
+        $scope.totalcount = 0;
+
+        $scope.pageIndex = 1;
+
+        $scope.pageSize = 5;
+
+        $scope.searchText = '';
+        //----------------------------------------------------------------------------------------------------------------
+        $scope.OrerNotComfirm = function () {
+                $http.get(current_url + "DonHang/get-donhang-chuaxacthuc/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                        $scope.listdh = response.data.listDonHang;
+                        $scope.totalcount = response.data.totalcount;
+                        console.log($scope.listdh);
+
+                }, function (error) {
+                        alert('Có lỗi xảy ra');
+                });
+        }
+        $scope.OrerNotComfirm();
+        $scope.pagechanged = function () {
+                $scope.OrerNotComfirm();
+
+        }
+        $scope.changePageSize = function () {
+                $scope.pageIndex = 1;
+                $scope.OrerNotComfirm();
+        }
+        //
+        $scope.OrerComfirm = function () {
+                $http.get(current_url + "DonHang/get-donhang-daxacthuc/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                        $scope.ordcomfirm = response.data.listDonHang;
+                        $scope.totalcount = response.data.totalcount;
+                        console.log($scope.orcomfirm);
+
+                }, function (error) {
+                        alert('Có lỗi xảy ra');
+                });
+        }
+        $scope.OrerComfirm();
+        $scope.pagechanged = function () {
+                $scope.OrerComfirm();
+
+        }
+        $scope.changePageSize = function () {
+                $scope.pageIndex = 1;
+                $scope.OrerComfirm();
+        }
+        //
+        $scope.OrerDelivered = function () {
+                $http.get(current_url + "DonHang/get-donhang-dagiao/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                        $scope.orddelivered = response.data.listDonHang;
+                        $scope.totalcount = response.data.totalcount;
+                        console.log($scope.listdh);
+
+                }, function (error) {
+                        alert('Có lỗi xảy ra');
+                });
+        }
+        $scope.OrerDelivered();
+        $scope.pagechanged = function () {
+                $scope.OrerDelivered();
+
+        }
+        $scope.changePageSize = function () {
+                $scope.pageIndex = 1;
+                $scope.OrerDelivered();
+        }
+        //
+        $scope.comfirm = function (id) {
+                $http.get(current_url + "DonHang/xacthuc/" + id).then(function (d) {
+                        alert('xác thực thành công');
+                        $http.get(current_url + "DonHang/get-donhang-chuaxacthuc/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                                $scope.listdh = response.data.listDonHang;
+                                $scope.totalcount = response.data.totalcount;
+                                console.log($scope.listdh);
+                        }, function (error) {
+                                alert('Có lỗi xảy ra');
+                        });
+                }, function (error) {
+                        alert('Có lỗi xảy ra');
+                });
+
+        };
+        $scope.cancel = function (id) {
+                $http.get(current_url + "DonHang/huy-donhang/" + id).then(function (d) {
+                        alert('Hủy thành công');
+                        $http.get(current_url + "DonHang/get-donhang-chuaxacthuc/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                                $scope.listdh = response.data.listDonHang;
+                                $scope.totalcount = response.data.totalcount;
+                                console.log($scope.listdh);
+                        }, function (error) {
+                                alert('Có lỗi xảy ra');
+                        });
+                }, function (error) {
+                        alert('Có lỗi xảy ra');
+                });
+
+        };
+});
+app.controller('trangthaidonhang', function ($scope, $http, $location) {
+        $http.get(current_url + "DonHang/get-by-id/" + $location.search().MaDonHang).then(function (d) {
+                $scope.donhang = d.data;
+                console.log($scope.donhang);
+        }, function (error) {
+                alert('Có lỗi xảy ra');
+        });
+        $scope.update = function () {
+                var dh = {
+                        "MaDonHang": $scope.donhang.maDonHang,
+                        "TrangThaiDonHang": $scope.donhang.trangThaiDonHang,
+                        "TrangThaiVanChuyen": $scope.donhang.trangThaiVanChuyen,
+                        "TrangThaiThanhToan": $scope.donhang.trangThaiThanhToan
+                }
+                $http({
+                        method: 'POST',
+                        data: dh,
+                        url: current_url + 'DonHang/update-status'
+                }).then(function (d) {
+                        alert("Cập nhật trạng thái thành công");
+                        window.location.href = 'donhangdaxacthuc.html'
+                }, function (e) {
+                        console.log(e);
+                });
+        }
+});
+app.controller('thongke', function ($scope,$http) {
+        $http.get(current_url + "HangSanXuat/get-all").then(function (response) {
+                $scope.hangsx = response.data;
+                console.log(response.data);
+        }, function (error) {
+                alert('Có lỗi xảy ra');
+        });
+        $http.get(current_url + "LoaiCamera/get-menu").then(function (response) {
+                $scope.listmenu = response.data;
+        }, function (error) {
+                alert('Có lỗi xảy ra');
+        });
+});
 function removeDumplicateValue(myArray) {
         var newArray = [];
 

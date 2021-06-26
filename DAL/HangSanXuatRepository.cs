@@ -104,7 +104,6 @@ namespace DAL
                 throw;
             }
         }
-
         public HangSanXuat Get_ByID(int MaHang)
         {
             HangSanXuat hsx = new HangSanXuat();
@@ -130,7 +129,6 @@ namespace DAL
             }
             return hsx;
         }
-
         public bool UpdateHang(HangSanXuat hsx)
         {
             try

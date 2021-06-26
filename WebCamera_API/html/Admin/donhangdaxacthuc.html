@@ -6,9 +6,9 @@
     <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -16,12 +16,12 @@
     <meta name="description"
         content="Gradient Able Bootstrap admin template made using Bootstrap 4. The starter version of Gradient Able is completely free for personal project." />
     <meta name="keywords"
-        content=", Flat ui, Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+        content="free dashboard template, free admin, free bootstrap template, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="codedthemes">
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap/css/bootstrap.min.css">
     <!-- themify-icons line icon -->
@@ -32,6 +32,8 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="assets/css/ui-bootstrap.css">
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
     <script src="./controllerjs/angular.min.js"></script>
@@ -39,24 +41,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.js"
         integrity="sha512-xndMzK9x1ZhE9Jsj38+gx8lSAxJ9UZrtsCb8cY9P1QX+X4qBi0F+J/TbxBkywc53w4S2qaaBY/WjvH4bUW4W9Q=="
         crossorigin="anonymous"></script>
+
     <script src="./controllerjs/hangsanxuat.js"></script>
+    <script src="./controllerjs/script.js"></script>
 </head>
 
-<body ng-app="myApp" ng-controller="camera">
-    <!-- <div class="fixed-button">
-        <a href="https://codedthemes.com/item/gradient-able-admin-template" target="_blank"
-            class="btn btn-md btn-primary">
-            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
-        </a>
-    </div> -->
-    <!-- Pre-loader start -->
+<body ng-app="myApp" ng-controller="donhang">
     <div class="theme-loader">
         <div class="loader-track">
             <div class="loader-bar"></div>
         </div>
     </div>
     <!-- Pre-loader end -->
-
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
@@ -181,9 +177,9 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="auth-normal-sign-in.html">
+                                        <button onclick="LogOut()">
                                             <i class="ti-layout-sidebar-left"></i> Logout
-                                        </a>
+                                        </button>
                                     </li>
                                 </ul>
                             </li>
@@ -191,12 +187,11 @@
                     </div>
                 </div>
             </nav>
-
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-                        <div class="pcoded-inner-navbar main-menu">                    
+                        <div class="pcoded-inner-navbar main-menu">
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="active">
                                     <a href="index.html">
@@ -208,309 +203,346 @@
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Hãng sản xuất</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Hãng sản
+                                            xuất</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
                                             <a href="accordion.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Thêm hãng</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Thêm
+                                                    hãng</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class=" ">
                                             <a href="hangsanxuat-index.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Hiển thị hãng</span>
+                                                <span class="pcoded-mtext"
+                                                    data-i18n="nav.basic-components.breadcrumbs">Hiển thị hãng</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
-                                        </li>                                      
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="fas fa-spa"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Loại Camera</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Loại
+                                            Camera</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
                                             <a href="loai-add.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Thêm loại</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Thêm
+                                                    loại</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class=" ">
                                             <a href="loai-index.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Hiển thị các loại</span>
+                                                <span class="pcoded-mtext"
+                                                    data-i18n="nav.basic-components.breadcrumbs">Hiển thị các
+                                                    loại</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
-                                        </li>                                      
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="fab fa-product-hunt"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Sản phẩm</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Sản phẩm</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
                                             <a href="sanpham-add.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Thêm sản phẩm</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Thêm
+                                                    sản phẩm</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class=" ">
                                             <a href="sanpham-index.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Hiển thị các sản phẩm</span>
+                                                <span class="pcoded-mtext"
+                                                    data-i18n="nav.basic-components.breadcrumbs">Hiển thị các sản
+                                                    phẩm</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
-                                        </li>                                      
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="fas fa-truck-moving"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Nhà cung cấp</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Nhà cung
+                                            cấp</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
                                             <a href="nhacungcap-add.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Thêm nhà cung cấp</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Thêm
+                                                    nhà cung cấp</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class=" ">
                                             <a href="nhacungcap-index.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Hiển thị nhà cung cấp</span>
+                                                <span class="pcoded-mtext"
+                                                    data-i18n="nav.basic-components.breadcrumbs">Hiển thị nhà cung
+                                                    cấp</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
-                                        </li>                                      
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="fas fa-file-invoice"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Hóa đơn nhập</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Hóa đơn
+                                            nhập</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
                                             <a href="nhacungcap-add.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Thêm hóa đơn nhập</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Thêm
+                                                    hóa đơn nhập</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class=" ">
                                             <a href="nhacungcap-index.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Hiển thị hóa đơn nhập</span>
+                                                <span class="pcoded-mtext"
+                                                    data-i18n="nav.basic-components.breadcrumbs">Hiển thị hóa đơn
+                                                    nhập</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
-                                        </li>                                      
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="fas fa-money-bill"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Đơn hàng</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Đơn hàng</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
-                                            <a href="donhangchuaxacthuc.html">
+                                            <a href="nhacungcap-index.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Đơn hàng chưa xác thực</span>
+                                                <span class="pcoded-mtext"
+                                                    data-i18n="nav.basic-components.breadcrumbs">Hiển thị hóa đơn
+                                                    nhập</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
-                                        </li>     
-                                        <li class=" ">
-                                            <a href="donhangdaxacthuc.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Đơn hàng đã xác thực</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>     
-                                        <li class=" ">
-                                            <a href="donhangdagiao.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Đơn hàng đã giao</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>   
-                                        <li class=" ">
-                                            <a href="donhangdahuy.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Đơn hàng đã hủy</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>                                        
+                                        </li>
                                     </ul>
                                 </li>
-                            </ul>  
+                            </ul>
+
                         </div>
                     </nav>
                     <div class="pcoded-content">
                         <div class="pcoded-inner-content">
-
-                            <!-- Main-body start -->
                             <div class="main-body">
                                 <div class="page-wrapper">
-                                    <!-- Page-header start -->
-                                    <div class="page-header card">
-                                        <div class="card-block">
-                                            <h5 class="m-b-10">Thêm sản phẩm</h5>
-                                            <p class="text-muted m-b-10">lorem ipsum dolor sit amet, consectetur
-                                                adipisicing elit</p>
-                                            <ul class="breadcrumb-title b-t-default p-t-10">
-                                                <li class="breadcrumb-item">
-                                                    <a href="index.html"> <i class="fa fa-home"></i> </a>
-                                                </li>
-                                                <li class="breadcrumb-item"><a href="#!">Sản phẩm</a>
-                                                </li>
-                                                <li class="breadcrumb-item"><a href="#!">Thêm sản phẩm</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- Page-header end -->
-
-                                    <!-- Page body start -->
                                     <div class="page-body">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <!-- Basic Form Inputs card start -->
-                                                <div class="card">
-                                                    <div class="card-block">
-                                                        <h4 class="sub-title">Nhập thông tin</h4>
-                                                        <form>
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Chọn loại</label>
-                                                                <div class="col-sm-10" id="selectma">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Tên camera</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control"
-                                                                        ng-model="TenCamera">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Độ phân giải</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control"
-                                                                        ng-model="DoPhanGiai">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Chip</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control"
-                                                                        ng-model="Chip">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Ống kính</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control"
-                                                                        ng-model="OngKinh">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Tầm quan sát</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control"
-                                                                        ng-model="TamQuanSat">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Nguồn điện</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control"
-                                                                        ng-model="NguonDien">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Hình ảnh</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="file" class="form-control"
-                                                                        id="file-img">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Giá</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="number" class="form-control" ng-model="Gia">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Sản phẩm hot</label>
-                                                                <div class="col-sm-10">
-                                                                    <select name="select" class="form-control" ng-model="CameraHot">
-                                                                        <option value="1">Hot</option>
-                                                                        <option value="0">Bình thường</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-10">
-                                                                    <button class="btn btn-primary"
-                                                                        ng-click="save()" ng-model="submit">Thêm</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
+                                        <!-- Basic table card start -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Đơn hàng chưa xác thực</h5>
+                                                <div class="card-header-right">
+                                                    <ul class="list-unstyled card-option">
+                                                        <li><i class="fa fa-chevron-left"></i></li>
+                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                        <li><i class="fa fa-minus minimize-card"></i></li>
+                                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                                        <li><i class="fa fa-times close-card"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="card-header">
+                                                <button type="button" class="btn btn-light"><a
+                                                        href="hangsanxuat-add.html"><i class="fas fa-plus"
+                                                            style="color: red;"></i>Thêm hãng</a></button>
+                                            </div>
+                                            <div class="card-block table-border-style">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Tên khách</th>
+                                                                <th scope="col">Số điện thoại</th>
+                                                                <th scope="col">Địa chỉ</th>
+                                                                <th scope="col">Ghi chú</th>
+                                                                <th scope="col">Trạng thái đơn hàng</th>
+                                                                <!-- <th scope="col">Trạng thái vận chuyển</th>
+                                                                 <th scope="col">Trạng thái thanh toán</th> -->
+                                                                <th scope="col" colspan="2">Tác vụ</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="x in ordcomfirm" ng-class-even="even"
+                                                                ng-class-odd="odd">
+                                                                <input type="hidden" class="input_value"
+                                                                    value="{{ x.maDonHang }}">
+                                                                <th scope="row">{{ x.tenKhachHang }}</th>
+                                                                <td>{{ x.sdt }}</td>
+                                                                <td>{{ x.diaChi }}</td>
+                                                                <td>{{ x.ghiChu }}</td>
+                                                                <td><span class="badge badge-primary">{{ x.trangThaiDonHang }}</span></td>
+                                                                <!-- <td>{{ x.trangThaiVanChuyen }}</td>
+                                                                <td>{{ x.trangThaiThanhToan }}</td> -->
+                                                                <td><button style="border: none;background-color:#fff;"
+                                                                        id="{{ x.maDonHang }}"
+                                                                        onclick="view(this.id)"><i
+                                                                            style="color: #3498DB;"
+                                                                            class="fas fa-eye"></i></td>
+                                                                            <td><a href="capnhattrangthai.html#!?MaDonHang={{ x.maDonHang }}"><i class="fas fa-pen"></i></a></td>
+                                                                           
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="header-table" colspan="12">
+                                                                    <span
+                                                                        class="form-group pull-left page-size form-inline">
+                                                                        <select class="form-control control-color"
+                                                                            ng-model="pageSize"
+                                                                            ng-change="changePageSize()">
+                                                                            <option value="3">3</option>
+                                                                            <option value="5">5</option>
+                                                                            <option value="7">7</option>
+                                                                            <option value="10">10</option>
+                                                                        </select>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td colspan="7">
+                                                                    <div>
+                                                                        <div style="display:flex;justify-content:space-between;align-items:center"
+                                                                            class="col-xs-pull-6">
+                                                                            <pagination total-items="totalcount"
+                                                                                ng-change="pagechanged()"
+                                                                                items-per-page="pageSize"
+                                                                                direction-links="true"
+                                                                                ng-model="pageIndex" max-size="maxsize"
+                                                                                class="pagination" boundary-links="true"
+                                                                                rotate="false" num-pages="numPages">
+                                                                            </pagination>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td colspan="4">
+                                                                    <a class=" btn btn-primary pull-right">Page:
+                                                                        {{pageIndex}} / {{numPages}}</a>
+                                                                </td>
+                                                            </tr>
+
+                                                        </tfoot>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Page body end -->
+                                    <div id="styleSelector">
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- Main-body end -->
-                            <div id="styleSelector">
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        var user = JSON.parse(localStorage.getItem('user'));
-        if (!user) {
-            window.location.href = "auth-login.html";
-        }
-    </script>
-    <!-- Warning Section Ends -->
-    <!-- Required Jquery -->
-    <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
-    <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js"></script>
-    <!-- jquery slimscroll js -->
-    <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
-    <!-- modernizr js -->
-    <script type="text/javascript" src="assets/js/modernizr/modernizr.js"></script>
-    <script type="text/javascript" src="assets/js/modernizr/css-scrollbars.js"></script>
 
-    <!-- Custom js -->
-    <script type="text/javascript" src="assets/js/script.js"></script>
-    <script src="assets/js/pcoded.min.js"></script>
-    <script src="assets/js/vartical-demo.js"></script>
-    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <!-- Required Jquery -->
+        <div id="bill-details">
+            <table class="table">
+                <div id="btn_cancel"><i class="far fa-window-close"></i></div>
+                <thead>
+                    <tr>
+                        <th scope="col">Tên camera</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Đơn giá</th>
+                        <th scope="col">Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody id="dataview">
+
+                </tbody>
+            </table>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $("#btn_cancel").click(function(){
+                $("#bill-details").hide();
+            })
+            function view(id) {
+                console.log(id);
+                $("#bill-details").toggle();
+                $.ajax({
+                    method: "GET",
+                    url: current_url + "DonHang/get-chitietdh/" + id,
+                    success: function (data) {
+                        console.log(data);
+                        var html = "";
+                        for (var i = 0; i < data.length; i++) {
+                            html +=
+                                `<tr>
+                                <th scope="row">`+ data[i].tenCamera + `</th>
+                                <td>`+ data[i].soLuong + `</td>
+                                <td>`+ Intl.NumberFormat().format(data[i].donGia) + `</td>
+                                <td>`+ Intl.NumberFormat().format(data[i].donGia * data[i].soLuong) + ` VNĐ</td>
+                            </tr>`
+                        }
+                        console.log(html);
+                        $("#dataview").html(html);
+                    }
+                })
+            }
+        </script>
+        <script>
+            var user = JSON.parse(localStorage.getItem('user'));
+            if (!user) {
+                window.location.href = "auth-login.html";
+            }
+        </script>
+        <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
+        <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js"></script>
+        <!-- jquery slimscroll js -->
+        <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
+        <!-- modernizr js -->
+        <script type="text/javascript" src="assets/js/modernizr/modernizr.js"></script>
+        <!-- am chart -->
+        <script src="assets/pages/widget/amchart/amcharts.min.js"></script>
+        <script src="assets/pages/widget/amchart/serial.min.js"></script>
+        <!-- Chart js -->
+        <script type="text/javascript" src="assets/js/chart.js/Chart.js"></script>
+        <!-- Todo js -->
+        <script type="text/javascript " src="assets/pages/todo/todo.js "></script>
+
+        <script type="text/javascript" src="assets/js/script.js"></script>
+        <script type="text/javascript " src="assets/js/SmoothScroll.js"></script>
+        <script src="assets/js/pcoded.min.js"></script>
+        <script src="assets/js/vartical-demo.js"></script>
+        <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
 
 </body>
 

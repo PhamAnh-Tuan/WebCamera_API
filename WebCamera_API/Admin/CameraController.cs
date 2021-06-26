@@ -106,5 +106,11 @@ namespace WebCamera_API.Admin
         {
             return _camerabusiness.Update_Hot(MaCamera);
         }
+        [Route("get-all")]
+        [HttpGet]
+        public List<Camera> GetAllCamera()
+        {
+            return _camerabusiness.GetAllCamera();
+        }
     }
 }

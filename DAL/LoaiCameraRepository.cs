@@ -123,7 +123,6 @@ namespace DAL
                             LoaiCamera loai = new LoaiCamera();
                             loai.MaHang = Convert.ToInt32(dataReader["MaHang"]);
                             loai.TenHang = Convert.ToString(dataReader["TenHang"]);
-                            loai.Parent_MaHang = Convert.ToInt32(dataReader["Parent_MaHang"]);
                             loai.MaLoai = Convert.ToInt32(dataReader["MaLoai"]);
                             loai.TenLoai = Convert.ToString(dataReader["TenLoai"]);
                             listloai.Add(loai);

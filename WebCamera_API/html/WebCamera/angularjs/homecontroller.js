@@ -42,7 +42,7 @@ app.controller("HomeClient", function ($rootScope, $scope, $http) {
         var idChildMenu = []; // reset sau mỗi lần lặp
         var nameChildMenu = []; // reset sau mỗi lần lặp
         for (var i = 0; i < data.length; i++) {
-            if (data[i].parent_MaHang == j) {
+            if (data[i].maHang == j) {
                 idChildMenu.push(data[i].maLoai);
                 nameChildMenu.push(data[i].tenLoai);
             }
@@ -138,9 +138,13 @@ app.controller("LoaisanphamController", function ($scope, $http, $location) {
     $http.get(current_url + "LoaiCamera/get-sp-maloai/" + $location.search().MaLoai).then(function (d) {
         if (d.data != null) {
             $scope.loaicamera = d.data;
-            console.log($scope.loaicamera);
-            $scope.sort = function (keyname) {
-                $scope.sortKey = keyname;   //set the sortKey to the param passed
+            // $scope.sort = function (keyname) {
+            //     $scope.sortKey = keyname;   //set the sortKey to the param passed
+            //     $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+            // }
+            $scope.Sort = function () {
+                key = $scope.keyname;
+                $scope.sortKey = key;   //set the sortKey to the param passed
                 $scope.reverse = !$scope.reverse; //if true make it false and vice versa
             }
             $scope.viewby = 8;
@@ -155,6 +159,12 @@ app.controller("LoaisanphamController", function ($scope, $http, $location) {
 
             $scope.setItemsPerPage = function (num) {
                 $scope.itemsPerPage = num;
+                $scope.currentPage = 1;
+            }
+            $scope.switchPerPage = function () {
+                number = $scope.selected;
+
+                $scope.itemsPerPage = number;
                 $scope.currentPage = 1;
             }
         }
@@ -190,7 +200,7 @@ app.controller("LoaisanphamController", function ($scope, $http, $location) {
         var idChildMenu = []; // reset sau mỗi lần lặp
         var nameChildMenu = []; // reset sau mỗi lần lặp
         for (var i = 0; i < data.length; i++) {
-            if (data[i].parent_MaHang == j) {
+            if (data[i].maHang == j) {
                 idChildMenu.push(data[i].maLoai);
                 nameChildMenu.push(data[i].tenLoai);
             }
@@ -286,19 +296,7 @@ app.controller("chitietsanpham", function ($scope, $http, $location) {
         alert('failed');
     });
 });
-///
-app.controller("RegisterController", function ($scope, $http) {
-    $scope.Regis = function () {
-        $http({
-            method: 'POST',
-            url: '/KhachHang/Register',
-            data: $scope.regis
-        }).then(function () {
-            $scope.regis;
-            window.history.back();
-        })
-    }
-});
+
 ///
 app.controller("GioHangController", function ($scope, $http) {
     var users = localStorage.getItem("Client");
@@ -320,79 +318,87 @@ app.controller("GioHangController", function ($scope, $http) {
 app.controller("PayController", function ($scope, $http, $rootScope) {
 
     var users = localStorage.getItem("Client");
-    var user = JSON.parse(users);
-    $scope.makhach = user.maKhachHang;
-    console.log($scope.makhach);
+    var us = JSON.parse(users);
+    $scope.user = us;
+    console.log($scope.user);
 
     var list = JSON.parse(localStorage.getItem('cart'));
-    console.log(list);
 
     var listorder = "";
     var n = 0;
     var t = 0;
+
+
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + '/' + mm + '/' + dd;
     list_json = [];
-    var madon = 'DH' + localStorage.getItem('MaKH') + localStorage.getItem('maddh');
+    var madon = 'DH' + $scope.user.maKhachHang + localStorage.getItem('maddh');
     for (x of list) {
         var item = {
+            MaDonHang: madon,
             MaCamera: x.id,
-            SoLuong: x.quantily
+            SoLuong: x.quantily,
+            DonGia: x.price
         }
         list_json.push(item);
     }
-
+    console.log(list_json);
     $scope.checkOut = function () {
-
+        $.each(list, function (key, value) {
+            t += value.price * value.quantily;
+        });
+        console.log(t);
         var a = new Date();
         var b = a.getTime();
         localStorage.setItem('maddh', b);
         var currentdate = new Date();
-        var datetime = currentdate.getMonth() + "/"
+        var datetime = currentdate.getMonth() + 1 + "/"
             + (currentdate.getDate()) + "/"
-            + currentdate.getFullYear();
-        var data1 = {
-            "MaDonHang": madon,
-            "listjson": list_json
-        }
-        console.log(data1);
+            + currentdate.getFullYear()
         // 
-        // $http({
-        //     method: 'POST',
-        //     url: '/ThanhToan/Add_DonHang',
-        //     data: {
-        //         MaDonHang: 'DH' + localStorage.getItem('MaKH') + localStorage.getItem('maddh'),
-        //         MaKhachHang: localStorage.getItem('MaKH'),
-        //         NgayTao: datetime,
-        //         TrangThaiDonHang: 'Chưa xác nhận',
-        //         TongTien: localStorage.getItem('tongtien'),
-        //         TenKhachHang: $scope.thongtin.TenKhachHang,
-        //         DiaChi: $scope.thongtin.SDT,
-        //         SDT: $scope.thongtin.DiaChi,
-        //         GhiChu: document.getElementById('comment').value,
-        //         listjson: list_json
-        //     }
-        // }).then(function () {
+        $http({
+            method: 'POST',
+            url: current_url + 'DonHang/create-donhang',
+            data: {
+                MaDonHang: madon,
+                MaKhachHang: $scope.user.maKhachHang,
+                NgayTao: datetime,
+                TrangThaiDonHang: 'Chưa xác nhận',
+                TrangThaiVanChuyen: 'Chưa vận chuyển',
+                TrangThaiThanhToan: 'Chưa thanh toán',
+                TongTien: t,
+                TenKhachHang: $scope.user.tenKhachHang,
+                DiaChi: $scope.user.diaChi,
+                SDT: $scope.user.sdt,
+                GhiChu: document.getElementById('delivery-payment-method').value
+            }
+        }).then(function (trus) {
 
-        //     var sp = JSON.parse(localStorage.getItem('sp'));
+            // var sp = JSON.parse(localStorage.getItem('sp'));
+           
+            $.each(list, function (key, value) {
+                // for(var i=0;i<list.length;i++){
+                $http({
+                    method: 'POST',
+                    url: current_url + 'DonHang/create-chitiet',
+                    data: {
+                        MaDonHang: madon,
+                        MaCamera: ~~value.id,
+                        SoLuong: value.quantily,
+                        DonGia: ~~value.price
+                    }
+                });
+            })
+        }).then(function (d) {
+            localStorage.removeItem('cart');
+            alert('Chúc mừng bạn thanh toán thành công');
+            window.location.href = 'index.html'
+        })
 
-        //     for (var i = 0; i < sp.length; i++) {
-        //         $http({
-        //             method: 'POST',
-        //             url: '/ThanhToan/Add_ChiTietDonHang',
-        //             data: {
-        //                 MaDonHang: 'DH' + localStorage.getItem('MaKH') + localStorage.getItem('maddh'),
-        //                 MaCauHinh: sp[i].MaCauHinh,
-        //                 SoLuong: sp[i].SoLuong,
-        //                 DonGia: sp[i].DonGia,
-        //             }
-        //         })
-        //         //    .then(function (d) {
-        //         //    $http.get('/Admin/GioHang/delete_GioHangByID?id=' + localStorage.getItem('ID')).then(function (d) {
-        //         //    })
-        //         //})
-        //     }
-        //     localStorage.removeItem('sp');
-        //     alert('Chúc mừng bạn thanh toán thành công');
-        //     window.location.href = '/Home/Index'
         // })
     };
 });

@@ -143,7 +143,7 @@
                                             <!--&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
                                             <ul class="product-list">
                                                 <li class="col-sm-4 product-item" style="width: 280px;"
-                                                    ng-repeat="x in loaicamera.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"
+                                                    ng-repeat="x in loaicamera.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))|orderBy:sortKey:reverse"
                                                     style="min-height: 310px;">
 
                                                     <div class="left-block">
@@ -173,7 +173,7 @@
 
                                                         <div class="content_price">
                                                             <span class="price product-price">
-                                                                <span style="color: orangered">Giá:</span> {{ x.gia
+                                                                <span style="color: orangered">Giá:</span> {{ x.gia|currency:' ':0
                                                                 }}</span>
                                                             <!--<br><span style="color: black">Price:</span>-->
                                                             <!--<span class="price old-price">55,000đ</span>-->
@@ -192,25 +192,13 @@
                     <div class="sortPagiBar">
                         <div class="bottom-pagination">
                             <nav>
-                                <!-- <ul class="pagination">
-                                <li class="active"><a href="product-vegetables.html">1</a></li>
-                                <li><a href="product-vegetables-2.html">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">Next &raquo;</span>
-                                    </a>
-                                </li>
-                            </ul> -->
                                 <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
                                     class="pagination-sm" items-per-page="itemsPerPage" style="float:right">
                                 </pagination>
                             </nav>
                         </div>
                         <div class="show-product-item">
-                            <select ng-model="viewby">
+                            <select ng-model="selected" ng-change="switchPerPage()">
                                 <option value="8">Show 8</option>
                                 <option value="16">Show 16</option>
                                 <option value="24">Show 24</option>
@@ -218,17 +206,16 @@
                             </select>
                         </div>
                         <div class="sort-product">
-                            <select ng-model="keyname">
-                                <option value="tenCamera">Product Name</option>
-                                <option value="gia">Price</option>
+                            <select ng-model="keyname" ng-change="Sort()">
+                                <option value="tenCamera" >Tên sản phẩm</option>
+                                <option value="gia">Giá</option>
                             </select>
-
-                            <div class="sort-product-icon">
-                                <div type="button" ng-click="sort('{{ keyname }}')">
+                            <!-- <div class="sort-product-icon">
+                                <div type="button" ng-click="sort('tenCamera')">
                                     <span class="glyphicon sort-icon" ng-show="sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                                     <i class="fa fa-sort-alpha-asc"></i>
                                 </div>                               
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

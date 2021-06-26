@@ -3,7 +3,7 @@ function showSuccessToast() {
         title: "Thành công!",
         message: "Sản phẩm đã được thêm vào giỏ hàng",
         type: "success",
-        duration: 5000
+        duration: 2500
     });
 }
 function showRegistration() {

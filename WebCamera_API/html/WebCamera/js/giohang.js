@@ -1,5 +1,4 @@
 function addToCart(item) {
-    debugger;
     var client = JSON.parse(localStorage.getItem('Client'));
     if (client == null) {
         document.getElementById("show-modal").style.display = "inline-block"
@@ -25,7 +24,7 @@ function addToCart(item) {
         var listcart = [];
         if (localStorage.getItem('cart') == null) {
             listcart.push(cartitem);
-            localStorage.setItem('cart', JSON.stringify(listcart))
+            localStorage.setItem('cart', JSON.stringify(listcart));showSuccessToast();
         }
         else {
             listcart = JSON.parse(localStorage.getItem('cart'));

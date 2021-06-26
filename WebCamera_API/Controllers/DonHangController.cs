@@ -26,5 +26,11 @@ namespace WebCamera_API.Controllers
         {
             return _donhangbusiness.CreateDonHang(model);
         }
+        [Route("create-chitiet")]
+        [HttpPost]
+        public bool CreateCTDonHang(ChiTietDonHang model)
+        {
+            return _donhangbusiness.CreateCTDonHang(model);
+        }
     }
 }

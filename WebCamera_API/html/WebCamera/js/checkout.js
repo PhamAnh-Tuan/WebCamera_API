@@ -6,11 +6,11 @@ var n = 0;
 var t = 0;
 list_json = [];
 for (x of list) {
-  var item = {
-    MaCamera: x.id,
-    SoLuong: x.quantily
-  }
-  list_json.push(item);
+  // var item = {
+  //   MaCamera: x.id,
+  //   SoLuong: x.quantily
+  // }
+  // list_json.push(item);
 
   t += x.price * x.quantily;
 
@@ -29,7 +29,7 @@ for (x of list) {
 }
 
 // var list2=JSON.parse(list_json);
-console.log(list_json);
+// console.log(list_json);
 document.getElementById("list-order").innerHTML = listorder;
 $("#total_price").text(total_all);
 

@@ -4,12 +4,11 @@ using System.Text;
 
 namespace Model
 {
-    public class ChiTietDonHang
+    public class ChiTietHoaDonNhap
     {
-        //public int MaChiTietDonHang { get; set; }
-        public string MaDonHang { get; set; }
+        public string MaCTHoaDonNhap { get; set; }
+        public string MaHoaDonNhap { get; set; }
         public int MaCamera { get; set; }
-        public string TenCamera { get; set; }
         public int SoLuong { get; set; }
         public int DonGia { get; set; }
     }

@@ -77,6 +77,8 @@ namespace WebCamera_API
             services.AddTransient<IDonHangBusiness, DonHangBusiness>();
             services.AddTransient<INhaCungCapRepository, NhaCungCapRepository>();
             services.AddTransient<INhaCungCapBusiness, NhaCungCapBusiness>();
+            services.AddTransient<IHoaDonNhapRepository, HoaDonNhapRepository>();
+            services.AddTransient<IHoaDonNhapBusiness, HoaDonNhapBusiness>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
