@@ -13,7 +13,6 @@ app.controller('myCtrl', function ($scope, $http, $location) {
         //----------------------------------------------------------------------------------------------------------------
         $scope.HangSXLisst = function () {
                 console.log(_user)
-                console.log(_user.token);
                 $http.get(current_url + "HangSanXuat/get-hang/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
                         $scope.listhang = response.data.listHang;
                         $scope.totalcount = response.data.totalcount;
@@ -60,6 +59,14 @@ app.controller('myCtrl', function ($scope, $http, $location) {
                 });
 
         }
+        $http({
+                method: 'GET',
+                url: 'https://github.com/madnh/hanhchinhvn/blob/master/dist/tinh_tp.json'
+        }).then(function (d) {
+                console.log(d.data);
+        }, function (e) {
+                console.log(e);
+        });
 });
 app.controller('edit', function ($scope, $http, $location) {
         $http.get(current_url + "HangSanXuat/get-byid-hang/" + $location.search().MaHang).then(function (d) {
@@ -635,12 +642,6 @@ app.controller('hoadonnhap', function ($scope, $http, $location) {
                 });
 
         };
-        $http.get(current_url + "Camera/get-all").then(function (response) {
-                $scope.listCamera = response.data;
-                console.log($scope.listCamera);
-        }, function (error) {
-                alert('Có lỗi xảy ra');
-        });
         $http.get(current_url + "NhaCungCap/get-all").then(function (response) {
                 $scope.listncc = response.data;
                 console.log($scope.listncc);
@@ -680,6 +681,18 @@ app.controller('hoadonnhap', function ($scope, $http, $location) {
                         console.log(e);
                 });
         }
+        
+        $scope.LoaiLisst = function () {
+                $http.get(current_url + "Camera/get-all").then(function (response) {
+                        $scope.listCamera = response.data;
+                        console.log($scope.listCamera);
+
+                }, function (error) {
+                        alert('Có lỗi xảy ra');
+                });
+        }
+        $scope.LoaiLisst();
+
 });
 app.controller('donhang', function ($scope, $http, $location) {
         $scope.maxsize = 5;
