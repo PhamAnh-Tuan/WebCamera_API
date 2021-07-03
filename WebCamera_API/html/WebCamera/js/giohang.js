@@ -97,7 +97,7 @@ function LoadData() {
         <div>
     <div class="cart__item-info">
         <span style="text-overflow: ellipsis;white-space: nowrap;padding-right: 16px;">`+ x.name + `</span>
-        <div style="font-size: 1.3rem;flex:1">2.000.000đ</div>
+        <div style="font-size: 1.3rem;flex:1">`+prices+`</div>
     </div></div>
     </li>`;
     }

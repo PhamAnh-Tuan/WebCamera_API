@@ -5952,7 +5952,8 @@ Social Icons
 }
 
 .cart__item{
-    display: flex;align-items: flex-start;
+    display: flex;
+    align-items: center;
     margin:10px 0px;
 }
 .cart__item-img{

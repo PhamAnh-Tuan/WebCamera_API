@@ -510,8 +510,6 @@
             })
             function view(id) {
                 $("#bill-details").toggle();
-                // var r = $(id).parents().eq(1).find('.input_value').val();
-                // localStorage.setItem('mahoadon', r);
                 $.ajax({
                     method: "GET",
                     url: current_url + "HoaDonNhap/get-list-cthoadonnhap/" + id,

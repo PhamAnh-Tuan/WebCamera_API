@@ -1,26 +1,11 @@
-function showSuccessToast() {
-    toast({
-        title: "Thành công!",
-        message: "Sản phẩm đã được thêm vào giỏ hàng",
-        type: "success",
-        duration: 2500
-    });
-}
-function showRegistration() {
-    toast({
-        title: "Thành công!",
-        message: "Đăng ký thông tin thành công",
-        type: "success",
-        duration: 1000
-    });
-}
+
 function showTitle(title) {
     console.log(title);
     toast({
         title: "Thành công!",
         message: title,
         type: "success",
-        duration: 1000
+        duration: 2000
     });
 }
 function toast({ title = "", message = "", type = "info", duration = 3000 }) {
@@ -28,12 +13,10 @@ function toast({ title = "", message = "", type = "info", duration = 3000 }) {
     if (main) {
         const toast = document.createElement("div");
 
-        // Auto remove toast
         const autoRemoveId = setTimeout(function () {
             main.removeChild(toast);
         }, duration + 1000);
 
-        // Remove toast when clicked
         toast.onclick = function (e) {
             if (e.target.closest(".toast__close")) {
                 main.removeChild(toast);

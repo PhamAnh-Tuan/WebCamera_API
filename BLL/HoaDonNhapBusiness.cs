@@ -18,7 +18,7 @@ namespace BLL
         {
             return _res.GetHoaDonNhap(Pageindex, Pagesize);
         }
-        public List<ChiTietHoaDonNhap> Get_List_CTHoaDonNhap(int MaHoaDonNhap)
+        public List<ChiTietHoaDonNhap> Get_List_CTHoaDonNhap(string MaHoaDonNhap)
         {
             return _res.Get_List_CTHoaDonNhap(MaHoaDonNhap);
         }

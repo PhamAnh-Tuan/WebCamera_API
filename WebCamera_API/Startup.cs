@@ -18,7 +18,6 @@ using DAL.Interfaces;
 using BLL.Interfaces;
 using DAL;
 using BLL;
-
 namespace WebCamera_API
 {
     public class Startup
@@ -33,14 +32,30 @@ namespace WebCamera_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //
+            var TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidIssuer = "https://fbi-demo.com",
+                ValidAudience = "https://fbi-demo.com",
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SXkSqsKyNUyvGbnHs7ke2NCq8zQzNLW7mPmHbnZZ")),
+                ClockSkew = TimeSpan.Zero // remove delay of token when expire
+            };
+            //
             services.AddCors();
             services.AddControllers();
 
-            // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
+
+            //
+            services.AddAuthorization(cfg =>
+            {
+                cfg.AddPolicy("Admin", policy => policy.RequireClaim("login", "true"));
+
+            });
+            //
+
             services.Configure<AppSettings>(appSettingsSection);
 
-            // configure jwt authentication
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             services.AddAuthentication(x =>
@@ -55,11 +70,17 @@ namespace WebCamera_API
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    //IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
-                    ValidateAudience = false
+                    ValidateAudience = false,
+
+
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });
+            
             services.AddControllers();
             
 
@@ -81,24 +102,8 @@ namespace WebCamera_API
             services.AddTransient<IHoaDonNhapBusiness, HoaDonNhapBusiness>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
-
-            //app.UseHttpsRedirection();
-
-            //app.UseRouting();
-
-            //app.UseAuthorization();
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
 
             app.UseRouting();
             // global cors policy
@@ -108,7 +113,9 @@ namespace WebCamera_API
                 .AllowAnyHeader());
 
             app.UseAuthentication();
+            app.UseRouting();
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {

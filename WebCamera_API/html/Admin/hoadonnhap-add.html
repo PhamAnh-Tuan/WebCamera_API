@@ -383,8 +383,6 @@
                                     <div class="page-header card">
                                         <div class="card-block">
                                             <h5 class="m-b-10">Thêm hóa đơn nhập</h5>
-                                            <p class="text-muted m-b-10">lorem ipsum dolor sit amet, consectetur
-                                                adipisicing elit</p>
                                             <ul class="breadcrumb-title b-t-default p-t-10">
                                                 <li class="breadcrumb-item">
                                                     <a href="index.html"> <i class="fa fa-home"></i> </a>
@@ -412,8 +410,8 @@
                                                                     cấp</label>
                                                                 <div class="col-sm-10">
                                                                     <select class="custom-select my-1 mr-sm-2"
-                                                                        id="inlineFormCustomSelectPref"
-                                                                        style="width: 100%;" ng-model="mancc">
+                                                                        id="idNCC" style="width: 100%;"
+                                                                        ng-model="mancc">
                                                                         <option selected>Choose...</option>
                                                                         <option value="{{ x.maNCC }}"
                                                                             ng-repeat="x in listncc">{{ x.tenNCC }}
@@ -425,124 +423,35 @@
                                                                 <label class="col-sm-2 col-form-label">Ngày nhập</label>
                                                                 <div class="col-sm-10">
                                                                     <input type="date" class="form-control"
-                                                                        ng-model="ngaynhap">
+                                                                        id="ngaynhap">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
-                                                                <label class="col-sm-2 col-form-label">Tổng tiền</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="number" class="form-control"
-                                                                        ng-model="tongtien">
+                                                                <div class="col-sm-12">
+                                                                    <button class="btn btn-primary" id="bntAdd">Thêm sản
+                                                                        phẩm</button>
                                                                 </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-10">
-                                                                    <button class="btn btn-primary">Thêm sản phẩm</button>
-                                                                </div>
-                                                                <div class="col-sm-10 add-product">
+                                                                <div class="col-sm-12">
+                                                                    <table style="width:100%">
+                                                                        <tfoot class="add-product">
 
+                                                                        </tfoot>
+                                                                    </table>
                                                                 </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-10">
-                                                                    <button class="btn btn-primary"
-                                                                        ng-click="save()">Thêm</button>
-                                                                </div>
-                                                            </div>
+                                                            </div>                           
                                                         </form>
                                                     </div>
                                                     <div class="card-block">
-                                                        <!-- <table class="table table-striped" style="display: block;">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th scope="col">Hình ảnh</th>
-                                                                    <th scope="col">Tên hãng</th>
-                                                                    <th scope="col">Tên loại</th>
-                                                                    <th scope="col">Tên camera</th>
-                                                                    <th scope="col">Độ phân giải </th>
-                                                                    <th scope="col">Hot</th>
-                                                                    <th scope="col">Giá</th>
-                                                                    <th scope="col">Sửa</th>
-                                                                    <th scope="col">Xóa</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr ng-repeat="x in listCamera |filter:searchText" ng-class-even="even"
-                                                                    ng-class-odd="odd">
-                                                                    <th scope="row">
-                                                                        <img src="./assets/images/product/{{ x.hinhAnh }}"
-                                                                            alt="" style="width:70px">
-                                                                        </th>
-                                                                    <td>{{ x.tenHang }}</td>
-                                                                    <td>{{ x.tenLoai }}</td>
-                                                                    <td>{{ x.tenCamera }}</td>
-                                                                    <td>{{ x.doPhanGiai }}</td>
-                                                                    <td>
-                                                                        <span ng-if="x.cameraHot=='1'">
-                                                                            <button ng-click="updatehot(x.maCamera)" style="border: none;">
-                                                                                <i class="fab fa-hotjar"
-                                                                                    style="color: red;"></i>
-                                                                            </button>
-                                                                        </span>
-                                                                        <span ng-if="x.cameraHot=='0'">
-                                                                            <button ng-click="updatehot(x.maCamera)" style="border: none;">
-                                                                                <i class="fab fa-hotjar"
-                                                                                    ></i>
-                                                                            </button>
-                                                                        </span>
-                                                                    </td>
-                                                                    <td>{{ x.gia|currency:'':0 }}</td>
-                                                                    <td><a
-                                                                            href="sanpham-edit.html#!?MaCamera={{x.maCamera}}"><i
-                                                                                class="far fa-edit"></i></a></td>
-                                                                    <td><button ng-click="delete(x.maCamera)"
-                                                                            style="border: none;"><i
-                                                                                class="fas fa-trash"></i></button></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="header-table" colspan="12">
-                                                                        <span
-                                                                            class="form-group pull-left page-size form-inline">
-                                                                            <select class="form-control control-color"
-                                                                                ng-model="pageSize"
-                                                                                ng-change="changePageSizes()">
-                                                                                <option value="3">3</option>
-                                                                                <option value="5">5</option>
-                                                                                <option value="7">7</option>
-                                                                                <option value="10">10</option>
-                                                                            </select>
-                                                                        </span>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                            <tfoot>
-                                                                <tr>
-                                                                    <td colspan="5">
-                                                                        <div>
-                                                                            <div style="display:flex;justify-content:space-between;align-items:center"
-                                                                                class="col-xs-pull-6">
-                                                                                <pagination total-items="totalcount"
-                                                                                    ng-change="pagechangeds()"
-                                                                                    items-per-page="pageSize"
-                                                                                    direction-links="true"
-                                                                                    ng-model="pageIndex" max-size="maxsize"
-                                                                                    class="pagination" boundary-links="true"
-                                                                                    rotate="false" num-pages="numPages">
-                                                                                </pagination>
-    
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td colspan="4">
-                                                                        <a class=" btn btn-primary pull-right">Page:
-                                                                            {{pageIndex}} / {{numPages}}</a>
-                                                                    </td>
-                                                                </tr>
-    
-                                                            </tfoot>
-                                                        </table> -->
                                                         <div class="list-product">
 
+                                                        </div>
+                                                        <div class="form-group row">                                   
+                                                            <div class="col-sm-9">
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <button class="btn btn-primary"
+                                                                onclick="AddBill()" style="float: right;">Thêm hóa đơn</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -560,7 +469,7 @@
             </div>
         </div>
     </div>
-   
+
     <script>
         var user = JSON.parse(localStorage.getItem('user'));
         if (!user) {
@@ -584,7 +493,141 @@
     <script src="assets/js/pcoded.min.js"></script>
     <script src="assets/js/vartical-demo.js"></script>
     <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-   
+    <script>
+        $(document).ready(function () {
+            cart = [];
+            $("#bntAdd").click(function () {
+                var prd;
+                var data = {};
+                $.ajax({
+                    url: current_url + "Camera/get-all",
+                    type: 'GET',
+                    success: function (res) {
+                        prd = res;
+                        console.log(prd);
+                        var html = "";
+                        html += `<tr>
+                    <td>
+                        <select onchange=""
+                            class="add_id form-control select2 select2-hidden-accessible"
+                            name=""
+                            style="width:100% !important;"
+                            id="elementId" tabindex="-1"
+                            aria-hidden="true">
+                            <option value=""
+                                data-select2-id="227">Chọn
+                                sản
+                                phẩm</option>`;
+                        $.each(prd, function (key, value) {
+                            html += `<option value="${value.maCamera}">`
+                                + value.tenCamera +
+                                `</option>`;
+                        });
+                        html += `</select>
+                    </td>
+                    <td>
+                        <input onchange="" type="number"
+                            min="0"
+                            class="add_price form-control"
+                            name="add_price" id="prd_price"
+                            value="0">
+                    </td>
+                    <td>
+                        <input
+                            type="number" min="0"
+                            class="add_qty form-control"
+                            name="add_qty"
+                            id="prd_number" value="0">
+                    </td>
+                    <td>
+                        <button
+                           onclick="AddP($(this))"
+                            class=" btn btn-danger btn-md btn-flat"
+                            data-title="Delete"><i
+                                class="fas fa-check"></i></i>
+                        </button>
+                    </td>
+                </tr>`;
+                        $('.add-product').append(html);
+                    }
+                })
+            })
+        })
+        function AddP(item) {
+            console.log(item.parents().eq(1).find("select").val())
+            console.log(item.parents().eq(1).find(".add_price").val())
+            console.log(item.parents().eq(1).find(".add_qty").val())
+            var cartitem = {
+                id: item.parents().eq(1).find("select").val(),
+                price: item.parents().eq(1).find(".add_price").val(),
+                quantily: item.parents().eq(1).find(".add_qty").val()
+            };
+            cart.push(cartitem);
+            console.log(cart);
+            $(item).parent().parent().remove();
+            Refresh();
+        }
+        function Refresh() {
+            var html = "";
+            html += `<table class="table">
+                        <thead>
+                              <tr>
+                                 <th>Mã sản phẩm</th>
+                                     <th>Số lượng</th>
+                                     <th>Đơn giá</th>
+                                     <th>Thành tiền</th>
+                              </tr>
+                        </thead>
+                        <tbody>`
+            $.each(cart, function (key, value) {
+                html += ` <tr>
+                            <td>`+ value.id + `</td>
+                            <td>`+ value.quantily + `</td>
+                            <td>`+ Intl.NumberFormat().format(value.price) + `</td>
+                            <td>`+ Intl.NumberFormat().format(value.quantily * value.price) + `</td>
+                        </tr>`
+            })
+            html += `</tbody></table>`;
+            $(".list-product").html(html);
+        }
+        function AddBill() {
+            var date = new Date();
+            var month = date.getMonth() + 1;
+            var id = 'MHD' + Math.floor(Math.random() * 1000000) + '-' + month + '-' + date.getDate() + '-' + date.getFullYear();
+            var total = 0;
+            $.each(cart, function (key, value) {
+                total += value.price * value.quantily;
+            })
+            form = {
+                'MaHoaDonNhap': id,
+                'MaNCC': $("#idNCC").val(),
+                'NgayNhap': $("#ngaynhap").val(),
+                'TongTien': total
+            }
+            $.ajax({
+                type: "POST",
+                url: current_url + "HoaDonNhap/create-hoadonnhap",
+                data: form
+            }).done(function (res) {
+                $.each(cart, function (key, value) {
+                    $.ajax({
+                        type: "POST",
+                        url: current_url + "HoaDonNhap/create-cthoadonnhap",
+                        data: {
+                            'MaCTHoaDonNhap':'MCT' + Math.floor(Math.random() * 1000000),
+                            'MaHoaDonNhap':id,
+                            'MaCamera':value.id,
+                            'SoLuong':value.quantily,
+                            'DonGia':value.price
+                        }
+                    }).done(function(res){
+                        alert('thêm thành công');
+                    })
+                })
+            }
+            );
+        }
+    </script>
 </body>
 
 </html>

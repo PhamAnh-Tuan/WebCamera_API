@@ -31,7 +31,7 @@ app.controller("HomeClient", function ($rootScope, $scope, $http) {
             html += "</li>";
         }
 
-        $("#selectma").html(html)
+        $("#selectma").html(html);
         // console.log(html)
 
     }, function (error) {
@@ -127,7 +127,6 @@ app.controller("HomeClient", function ($rootScope, $scope, $http) {
         var user = JSON.parse(users);
         $scope.taikhoan = user.tenKhachHang;
         console.log($scope.taikhoan);
-
     }
 
 
@@ -222,6 +221,16 @@ app.controller("LoaisanphamController", function ($scope, $http, $location) {
             dd = "";
         }
     }
+
+    $scope.log = true;
+    if (localStorage.getItem("Client") != null) {
+        $scope.log = false;
+        $scope.tk = true;
+        var users = localStorage.getItem("Client");
+        var user = JSON.parse(users);
+        $scope.taikhoan = user.tenKhachHang;
+        console.log($scope.taikhoan);
+    }
 });
 ///
 app.controller("SettingController", function ($scope, $http) {
@@ -285,6 +294,15 @@ app.controller("Search", function ($scope, $http, $location) {
     }, function (error) {
         alert('Failed');
     });
+    $scope.log = true;
+    if (localStorage.getItem("Client") != null) {
+        $scope.log = false;
+        $scope.tk = true;
+        var users = localStorage.getItem("Client");
+        var user = JSON.parse(users);
+        $scope.taikhoan = user.tenKhachHang;
+        console.log($scope.taikhoan);
+    }
 });
 ///
 app.controller("chitietsanpham", function ($scope, $http, $location) {
@@ -295,6 +313,15 @@ app.controller("chitietsanpham", function ($scope, $http, $location) {
     }, function (error) {
         alert('failed');
     });
+    $scope.log = true;
+    if (localStorage.getItem("Client") != null) {
+        $scope.log = false;
+        $scope.tk = true;
+        var users = localStorage.getItem("Client");
+        var user = JSON.parse(users);
+        $scope.taikhoan = user.tenKhachHang;
+        console.log($scope.taikhoan);
+    }
 });
 
 ///
@@ -332,7 +359,7 @@ app.controller("PayController", function ($scope, $http, $rootScope) {
 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
     var yyyy = today.getFullYear();
     today = yyyy + '/' + mm + '/' + dd;
     list_json = [];
@@ -376,12 +403,8 @@ app.controller("PayController", function ($scope, $http, $rootScope) {
                 SDT: $scope.user.sdt,
                 GhiChu: document.getElementById('delivery-payment-method').value
             }
-        }).then(function (trus) {
-
-            // var sp = JSON.parse(localStorage.getItem('sp'));
-           
+        }).then(function (trus) {   
             $.each(list, function (key, value) {
-                // for(var i=0;i<list.length;i++){
                 $http({
                     method: 'POST',
                     url: current_url + 'DonHang/create-chitiet',
@@ -395,14 +418,11 @@ app.controller("PayController", function ($scope, $http, $rootScope) {
             })
         }).then(function (d) {
             localStorage.removeItem('cart');
-            alert('Chúc mừng bạn thanh toán thành công');
-            window.location.href = 'index.html'
+            showTitle('Chúc mừng bạn thanh toán thành công');
+            window.location.href = 'index.html';
         })
-
-        // })
     };
 });
-///
 
 
 

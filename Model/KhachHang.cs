@@ -14,5 +14,6 @@ namespace Model
         public int GioiTinh { get; set; }
         public string SDT { get; set; }
         public string DiaChi { get; set; }
+        public string token { get; set; }
     }
 }

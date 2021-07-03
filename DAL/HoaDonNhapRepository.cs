@@ -51,7 +51,7 @@ namespace DAL
             }
             return listhdn;
         }
-        public List<ChiTietHoaDonNhap> Get_List_CTHoaDonNhap(int MaHoaDonNhap)
+        public List<ChiTietHoaDonNhap> Get_List_CTHoaDonNhap(string MaHoaDonNhap)
         {
             List<ChiTietHoaDonNhap> ListChiTietHDN = new List<ChiTietHoaDonNhap>();
             try

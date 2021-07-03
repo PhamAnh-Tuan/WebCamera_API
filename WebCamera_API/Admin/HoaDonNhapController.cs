@@ -26,19 +26,19 @@ namespace WebCamera_API.Admin
         }
         [Route("get-list-cthoadonnhap/{MaHoaDonNhap}")]
         [HttpGet]
-        public List<ChiTietHoaDonNhap> Get_List_CTHoaDonNhap(int MaHoaDonNhap)
+        public List<ChiTietHoaDonNhap> Get_List_CTHoaDonNhap(string MaHoaDonNhap)
         {
             return _hoadonnhapbusiness.Get_List_CTHoaDonNhap(MaHoaDonNhap);
         }
         [Route("create-hoadonnhap")]
         [HttpPost]
-        public bool CreateHoaDonNhap(HoaDonNhap hdn)
+        public bool CreateHoaDonNhap([FromForm]HoaDonNhap hdn)
         {
             return _hoadonnhapbusiness.CreateHoaDonNhap(hdn);
         }
         [Route("create-cthoadonnhap")]
         [HttpPost]
-        public bool CreateCTHoaDonNhap(ChiTietHoaDonNhap ct)
+        public bool CreateCTHoaDonNhap([FromForm]ChiTietHoaDonNhap ct)
         {
             return _hoadonnhapbusiness.CreateCTHoaDonNhap(ct);
         }

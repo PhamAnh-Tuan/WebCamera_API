@@ -13,11 +13,24 @@ app.controller('myCtrl', function ($scope, $http, $location) {
         //----------------------------------------------------------------------------------------------------------------
         $scope.HangSXLisst = function () {
                 console.log(_user)
-                $http.get(current_url + "HangSanXuat/get-hang/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                // $http.get(current_url + "HangSanXuat/get-hang/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                //         $scope.listhang = response.data.listHang;
+                //         $scope.totalcount = response.data.totalcount;
+
+                // }, function (error) {
+                //         alert('Có lỗi xảy ra');
+                // });
+                $http({
+                        method: 'GET',
+                        headers: {
+                                "Authorization": 'Bearer ' + _user.token
+                        },
+                        url: current_url + "HangSanXuat/get-hang/" + $scope.pageIndex + "/" + $scope.pageSize
+                }).then(function (response) {
                         $scope.listhang = response.data.listHang;
                         $scope.totalcount = response.data.totalcount;
 
-                }, function (error) {
+                }, function (e) {
                         alert('Có lỗi xảy ra');
                 });
         }
@@ -32,15 +45,39 @@ app.controller('myCtrl', function ($scope, $http, $location) {
         }
         // xóa hãng
         $scope.delete = function (id) {
-                $http.get(current_url + "HangSanXuat/delete-hang/" + id).then(function (d) {
+                // $http.get(current_url + "HangSanXuat/delete-hang/" + id).then(function (d) {
+                //         alert('xóa thành công');
+                //         $http.get(current_url + "HangSanXuat/get-hang/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                //                 $scope.listhang = response.data.listHang;
+                //                 $scope.totalcount = response.data.totalcount;
+                //         }, function (error) {
+                //                 alert('Có lỗi xảy ra');
+                //         });
+                // }, function (error) {
+                //         alert('Có lỗi xảy ra');
+                // });
+                $http({
+                        method: 'GET',
+                        headers: {
+                                "Authorization": 'Bearer ' + _user.token
+                        },
+                        url: current_url + "HangSanXuat/delete-hang/" + id
+                }).then(function (response) {
                         alert('xóa thành công');
-                        $http.get(current_url + "HangSanXuat/get-hang/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                        $http({
+                                method: 'GET',
+                                headers: {
+                                        "Authorization": 'Bearer ' + _user.token
+                                },
+                                url: current_url + "HangSanXuat/get-hang/" + $scope.pageIndex + "/" + $scope.pageSize
+                        }).then(function (response) {
                                 $scope.listhang = response.data.listHang;
                                 $scope.totalcount = response.data.totalcount;
-                        }, function (error) {
+        
+                        }, function (e) {
                                 alert('Có lỗi xảy ra');
                         });
-                }, function (error) {
+                }, function (e) {
                         alert('Có lỗi xảy ra');
                 });
 
@@ -49,24 +86,20 @@ app.controller('myCtrl', function ($scope, $http, $location) {
         $scope.save = function () {
                 $http({
                         method: 'POST',
+                        headers: {
+                                "Authorization": 'Bearer ' + _user.token
+                        },
                         data: $scope.hsx,
                         url: current_url + 'HangSanXuat/create-hang'
                 }).then(function (d) {
                         alert("Thêm thành công");
-                        window.location.href = 'hangsanxuat-index.html'
-                }, function (e) {
-                        console.log(e);
-                });
+                        // showTitle('Thêm thành công');
+                        window.location.href = 'hangsanxuat-index.html';
 
+                }, function (e) {
+                        console.log('Thêm thất bại');
+                });
         }
-        $http({
-                method: 'GET',
-                url: 'https://github.com/madnh/hanhchinhvn/blob/master/dist/tinh_tp.json'
-        }).then(function (d) {
-                console.log(d.data);
-        }, function (e) {
-                console.log(e);
-        });
 });
 app.controller('edit', function ($scope, $http, $location) {
         $http.get(current_url + "HangSanXuat/get-byid-hang/" + $location.search().MaHang).then(function (d) {
@@ -88,6 +121,9 @@ app.controller('edit', function ($scope, $http, $location) {
                 console.log(object1);
                 $http({
                         method: 'POST',
+                        headers: {
+                                "Authorization": 'Bearer ' + _user.token
+                        },
                         url: current_url + 'HangSanXuat/update-hang',
                         data: object1
                 }).then(function (d) {
@@ -291,7 +327,7 @@ app.controller('camera', function ($scope, $http, $location) {
 
         function childmenu(data, j) {
                 var idChildMenu = [];
-                var nameChildMenu = []; 
+                var nameChildMenu = [];
                 for (var i = 0; i < data.length; i++) {
                         if (data[i].maHang == j) {
                                 idChildMenu.push(data[i].maLoai);
@@ -649,17 +685,17 @@ app.controller('hoadonnhap', function ($scope, $http, $location) {
                 alert('Có lỗi xảy ra');
         });
         $scope.save = function () {
-                var date=new Date();
-                var month=date.getMonth()+1;
-                var id='MHD'+ Math.floor(Math.random() * 1000000)+'/'+ month +'-'+date.getDate()+'-'+date.getFullYear();
-                localStorage.setItem('mahdn',id);
+                var date = new Date();
+                var month = date.getMonth() + 1;
+                var id = 'MHD' + Math.floor(Math.random() * 1000000) + '/' + month + '-' + date.getDate() + '-' + date.getFullYear();
+                localStorage.setItem('mahdn', id);
                 $http({
                         method: 'POST',
                         data: {
-                                "MaHoaDonNhap":id,
-                                "MaNCC":~~$scope.mancc,
-                                "NgayNhap":$scope.ngaynhap,
-                                "TongTien":~~$scope.tongtien
+                                "MaHoaDonNhap": id,
+                                "MaNCC": ~~$scope.mancc,
+                                "NgayNhap": $scope.ngaynhap,
+                                "TongTien": ~~$scope.tongtien
                         },
                         url: current_url + 'HoaDonNhap/create-hoadonnhap'
                 }).then(function (d) {
@@ -681,7 +717,7 @@ app.controller('hoadonnhap', function ($scope, $http, $location) {
                         console.log(e);
                 });
         }
-        
+
         $scope.LoaiLisst = function () {
                 $http.get(current_url + "Camera/get-all").then(function (response) {
                         $scope.listCamera = response.data;
@@ -692,6 +728,7 @@ app.controller('hoadonnhap', function ($scope, $http, $location) {
                 });
         }
         $scope.LoaiLisst();
+
 
 });
 app.controller('donhang', function ($scope, $http, $location) {
@@ -822,7 +859,7 @@ app.controller('trangthaidonhang', function ($scope, $http, $location) {
                 });
         }
 });
-app.controller('thongke', function ($scope,$http) {
+app.controller('thongke', function ($scope, $http) {
         $http.get(current_url + "HangSanXuat/get-all").then(function (response) {
                 $scope.hangsx = response.data;
                 console.log(response.data);

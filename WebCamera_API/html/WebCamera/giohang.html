@@ -35,7 +35,6 @@
 <body class="green" ng-app="Homeapp" ng-controller="GioHangController">
     <!-- HEADER -->
     <div id="header" class="header">
-
         <!-- MAIN HEADER -->
         <div class="container main-header">
             <div class="row" style="display: flex;align-items: center;">
@@ -48,10 +47,9 @@
                             <input type="text" placeholder="Search ..." ng-model="name" id="name">
                         </div>
                         <a ng-click="changevalue()" href="timkiem.html#!?KeyWord={{ name }}"
-                            class="pull-right btn-search" style="padding:12px"><i class="fa fa-search"></i></a>
+                            class="pull-right btn-search"></a>
                     </form>
                 </div>
-
                 <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 group-button-header">
                     <div style="display: flex;align-items: center;" ng-show="log">
                         <div style="padding: 0px 10px;margin-left: auto;">
@@ -61,16 +59,25 @@
                         <div style="padding: 0px 10px;position: relative;">
                             <a href="" style="font-size: 2.6rem;color: #43AF50;">
                                 <i class="fas fa-shopping-bag"></i>
-                                <div class="form_holder" style="right: 0;position: absolute;z-index: 99;">
+                                <div class="form_holder" style="right: 0;position: absolute;z-index: 99;opacity: 0;">
                                     <div class="cart-block">
-                                        <div class="cart-block-content" style="padding: 10px;">
+                                        <div class="cart-block-content">
                                             <div class="cart-block-list">
                                                 <div class="shop_cart">
-                                                    <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
-                                                    <ul >
-                                                        
-                                                    </ul>
+                                                    <table class="shop_table">
+                                                        <tbody id="show-cart">
+                                                            <tr>
+                                                                <th>Mã cấu hình</th>
+                                                                <th>Số lượng</th>
+                                                                <th>Đơn giá</th>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
+                                            </div>
+                                            <div class="toal-cart">
+                                                <span>Tổng tiền</span>
+                                                <span class="toal-price pull-right" id="total_price"></span>
                                             </div>
                                             <div class="cart-buttons">
                                                 <a href="shoping-cart.html" class="btn-check-out">Xem giỏ hàng</a>
@@ -107,13 +114,27 @@
                                         <div class="cart-block-content">
                                             <div class="cart-block-list">
                                                 <div class="shop_cart">
-                                                    <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
-                                                    <ul id="cart__all">
-                                                        
-                                                    </ul>
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Tên sản phẩm</th>
+                                                                <th>Số lượng</th>
+                                                                <th>Đơn giá</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="show-cart">
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                             <div class="toal-cart">
+                                                <span>Tổng tiền</span>
+                                                <span class="toal-price pull-right" id="total_price"></span>
                                             </div>
                                             <div class="cart-buttons">
                                                 <a href="giohang.html" class="btn-check-out">Xem giỏ hàng</a>
@@ -125,14 +146,14 @@
                         </div>
                     </div>
                 </div>
-
+    
             </div>
         </div>
         <!-- END MANIN HEADER -->
         <div id="nav-top-menu" class="nav-top-menu">
             <div class="container">
                 <div class="row">
-
+    
                     <div id="main-menu" class="col-sm-12 main-menu">
                         <nav class="navbar navbar-default">
                             <div class="container-fluid">
@@ -157,10 +178,10 @@
                                             </ul>
                                         </li>
                                         <!--<li><a href="#">Promotion</a></li>-->
-                                        <li><a href="news.html">News</a></li>
-                                        <li><a href="policy-faq.html">Policy & FAQ</a></li>
-                                        <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="contact-us.html">Contact Us</a></li>
+                                        <!-- <li><a href="news.html">News</a></li>
+                                        <li><a href="policy-faq.html">Policy & FAQ</a></li> -->
+                                        <li><a href="about-us.html">Giới thiệu</a></li>
+                                        <li><a href="contact-us.html">Liên hệ</a></li>
                                     </ul>
                                 </div>
                                 <!--/.nav-collapse -->
@@ -177,7 +198,7 @@
                 <!-- CART ICON ON MMENU -->
                 <div id="shopping-cart-box-ontop">
                     <i class="fa fa-user" data-toggle="modal" data-target="#myModal"></i>
-
+    
                     <div class="shopping-cart-box-ontop-content"></div>
                 </div>
             </div>
@@ -402,13 +423,13 @@
             <div id="introduce-box" class="row">
                 <div class="col-md-3">
                     <div id="address-box">
-                        <a href="#"><img src="images/logo.png" alt="logo" /></a>
+                        <a href="#"><img src="images/logo-vuhoangtelecom.svg" alt="logo" /></a>
 
                         <div id="address-list">
-                            <div class="tit-name">Address:</div>
+                            <div class="tit-name">Địa chỉ:</div>
                             <div class="tit-contain">999 Le Van Hien street, Ngu Hanh Son District, Danang city,
                                 Vietnam.</div>
-                            <div class="tit-name">Phone:</div>
+                            <div class="tit-name">Điện thoại:</div>
                             <div class="tit-contain">(+84) 511.3446.295</div>
                             <div class="tit-name">Email:</div>
                             <div class="tit-contain">ecoshop@gmail.com</div>
@@ -418,21 +439,21 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="introduce-title">CUSTOMER CARE</div>
+                            <div class="introduce-title">CHĂM SÓC KHÁCH HÀNG</div>
                             <ul id="introduce-support" class="introduce-list">
-                                <li> Mon - Fri: 7am to 8pm </li>
-                                <li>Sat & Sun: 7am to 6pm</li>
-                                <li><a href="policy-faq.html">How to Buy</a></li>
-                                <li><a href="policy-faq.html">How to Payment</a></li>
-                                <li><a href="policy-faq.html">FAQ</a></li>
+                                <li> Thứ Hai - Thứ Sáu: 7 giờ sáng đến 8 giờ tối </li>
+                                <li>T7 & CN: 7 giờ sáng đến 6 giờ chiều</li>
+                                <li><a href="policy-faq.html">Lam thê nao để mua</a></li>
+                                <li><a href="policy-faq.html">Cách thanh toán</a></li>
+                                <li><a href="policy-faq.html">Câu hỏi thường gặp</a></li>
                         </div>
                         <div class="col-sm-6">
-                            <div class="introduce-title">Policy</div>
+                            <div class="introduce-title">CHÍNH SÁCH</div>
                             <ul id="introduce-Account" class="introduce-list">
-                                <li><a href="policy-faq.html">Security Policy</a></li>
-                                <li><a href="policy-faq.html">Payment Policy</a></li>
-                                <li><a href="policy-faq.html">Return & Change Policy</a></li>
-                                <li><a href="policy-faq.html">Terms & Conditions</a></li>
+                                <li><a href="policy-faq.html">Chính sách bảo mật</a></li>
+                                <li><a href="policy-faq.html">Chính sách thanh toán</a></li>
+                                <li><a href="policy-faq.html">Chính sách đổi trả</a></li>
+                                <li><a href="policy-faq.html">Điều khoản và điều kiện</a></li>
                             </ul>
                         </div>
                     </div>
@@ -440,14 +461,20 @@
 
                 <div class="col-md-3">
                     <div id="contact-box">
-                        <div class="introduce-title">Subscribe to Eco Shop newsletter</div>
+                        <div class="introduce-title">ĐĂNG KÝ NHẬN BẢN TIN CỦA VŨ HOÀNG</div>
                         <div class="input-group" id="mail-box">
                             <input type="text" placeholder="Your email address" />
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">OK</button>
                             </span>
                         </div><!-- /input-group -->
-                        <div class="introduce-title">Follow Us</div>
+                        <div class="introduce-title">THEO CHÚNG TÔI</div>
+                        <!--<div class="social-link">-->
+                        <!--<a href="#"><i class="fa fa-facebook"></i></a>-->
+                        <!--<a href="#"><i class="fa fa-pinterest-p"></i></a>-->
+                        <!--<a href="#"><i class="fa fa-google-plus"></i></a>-->
+                        <!--<a href="#"><i class="fa fa-youtube"></i></a>-->
+                        <!--</div>-->
                         <div class="social-link">
                             <ul class="social-icons">
                                 <li><a class="rss" data-original-title="rss" href="#"></a></li>
@@ -464,11 +491,6 @@
 
                 </div>
             </div><!-- /#introduce-box -->
-
-
-            <div id="footer-menu-box">
-                <p class="text-center">Copyrights &#169; 2016 Eco Shop. All Rights Reserved.</p>
-            </div><!-- /#footer-menu-box -->
         </div>
     </footer>
 

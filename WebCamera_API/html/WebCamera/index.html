@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="images/logo-vuhoangtelecom.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css" />
@@ -30,7 +30,7 @@
         crossorigin="anonymous"></script>
 
     <script src="./angularjs/homecontroller.js"></script>
-    <title>Eco Shop</title>
+    <title>Camera thời đại số</title>
 </head>
 
 <body class="green" ng-app="Homeapp" ng-controller="HomeClient">
@@ -59,37 +59,13 @@
                             <a title="SignIn" href="" data-toggle="modal" data-target="#myModal">Đăng nhập / Đăng ký</a>
                         </div>
                         <div style="border-right: 1px solid #F6402E;height: 2rem"></div>
-                        <div style="padding: 0px 10px;position: relative;">
-                            <a href="" style="font-size: 2.6rem;color: #43AF50;">
+                        <div style="padding: 0px 10px;position: relative;" id="cart-hover">
+                            <a href="" style="color: #43AF50;">
                                 <i class="fas fa-shopping-bag"></i>
-                                <div class="form_holder" style="right: 0;position: absolute;z-index: 99;opacity: 0;">
+                                <div class="form_holder" style="right: 0;position: absolute;z-index: 99;" id="cartpro">
                                     <div class="cart-block">
                                         <div class="cart-block-content">
-                                            <div class="cart-block-list">
-                                                <div class="shop_cart">
-                                                    <table class="shop_table">
-                                                        <tbody id="show-cart">
-                                                            <tr>
-                                                                <th>Mã cấu hình</th>
-                                                                <th>Số lượng</th>
-                                                                <th>Đơn giá</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>{{d.MaSP}}</td>
-                                                                <td>{{d.SoLuong}}</td>
-                                                                <td>{{d.DonGia}}</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="toal-cart">
-                                                <span>Tổng tiền</span>
-                                                <span class="toal-price pull-right" id="total_price"></span>
-                                            </div>
-                                            <div class="cart-buttons">
-                                                <a href="shoping-cart.html" class="btn-check-out">Xem giỏ hàng</a>
-                                            </div>
+                                            <img src="images/empty-cart.png" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -121,28 +97,8 @@
                                     <div class="cart-block">
                                         <div class="cart-block-content">
                                             <div class="cart-block-list">
-                                                <div class="shop_cart">
-                                                    <table>
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Tên sản phẩm</th>
-                                                                <th>Số lượng</th>
-                                                                <th>Đơn giá</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="show-cart">
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                <div class="shop_cart" id="cart__all">
                                                 </div>
-                                            </div>
-                                            <div class="toal-cart">
-                                                <span>Tổng tiền</span>
-                                                <span class="toal-price pull-right" id="total_price"></span>
                                             </div>
                                             <div class="cart-buttons">
                                                 <a href="giohang.html" class="btn-check-out">Xem giỏ hàng</a>
@@ -153,14 +109,7 @@
                             </a>
                         </div>
                     </div>
-                    <!-- <a title="Compare" href="#" class="btn-compare">Compare</a>
-                <a title="My wishlist" href="#" class="btn-heart">Heart</a>
-
-                <div class="btn-cart" id="cart-block">
-                    <a title="SignIn" href="" data-toggle="modal" data-target="#myModal">Log In</a>
-                </div> -->
                 </div>
-
             </div>
         </div>
         <!-- END MANIN HEADER -->
@@ -192,10 +141,10 @@
                                             </ul>
                                         </li>
                                         <!--<li><a href="#">Promotion</a></li>-->
-                                        <li><a href="news.html">News</a></li>
-                                        <li><a href="policy-faq.html">Policy & FAQ</a></li>
-                                        <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="contact-us.html">Contact Us</a></li>
+                                        <!-- <li><a href="news.html">News</a></li>
+                                        <li><a href="policy-faq.html">Policy & FAQ</a></li> -->
+                                        <li><a href="about-us.html">Giới thiệu</a></li>
+                                        <li><a href="contact-us.html">Liên hệ</a></li>
                                     </ul>
                                 </div>
                                 <!--/.nav-collapse -->
@@ -239,85 +188,6 @@
             </div>
         </div>
     </div>
-    <!-- END Home slideder-->
-    <!-- <div class="page-top">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12">
-                <h2 class="page-heading">
-                    <span class="page-heading-title"><img alt="fashion" src="images/commerce-tag.png"/> PROMOTION</span>
-                </h2>
-
-                <div class="latest-deals-product">
-                    <ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav="true"
-                        data-margin="10" data-autoplayTimeout="1000" data-autoplayHoverPause="true"
-                        data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":5}}'>
-                        <li ng-repeat="x in sphot">
-                            <div class="left-block">
-                                <a><img class="img-responsive" alt="product"
-                                                 src="images/product-detail/vegetables/asparagus_300x300.jpg"/></a>
-
-                                <div class="quick-view">
-                                    <a title="Add to my wishlist" class="heart" href="#"></a>
-                                    <a title="Add to compare" class="compare" href="#"></a>
-                                    <a title="Quick view" href="images/product-detail/vegetables/asparagus_600x600.jpg" class="search fancybox-button"></a>
-                                </div>
-                                <div class="add-to-cart">
-                                    <a class="add-item-to-cart" title="Add to Carr" href="#" data-name="Asparagus - 1kg"
-                                       data-price="38500" data-image="vegetables/asparagus_300x300.jpg" data-product-code="AS109">Add to Cart</a>
-                                </div>
-                                <div class="price-percent-reduction2">
-                                    -30% OFF
-                                </div>
-                            </div>
-                            <div class="right-block">
-                                <h5 class="product-name"><a href="asparagus-detail.html">{{ x.tenCamera }}</a></h5>
-
-                                <div class="content_price">
-                                    <span class="price product-price">
-                                        <span style="color: orangered">Best Price:</span> 38,500đ</span>
-                                    <br><span style="color: black">Price:</span>
-                                    <span class="price old-price">55,000đ</span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-    <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-    <!-- <div class="demo_changer" id="demo_changer">
-    <div class="demo-icon fa fa-shopping-cart">
-        <span class="notify notify-left" id="count-cart">2</span>
-    </div>
-    <div class="form_holder">
-        <div class="cart-block">
-            <div class="cart-block-content">
-                <div class="cart-block-list">
-                    <div class="shop_cart">
-                        <table class="shop_table">
-                            <tbody id="show-cart">
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-                <div class="toal-cart">
-                    <span>Total</span>
-                    <span class="toal-price pull-right" id="total_price">54,000đ</span>
-                </div>
-                <div class="cart-buttons">
-                    <a href="shoping-cart.html" class="btn-check-out">Payment</a>
-                </div>
-            </div>
-        </div>
-       </div>
-</div> -->
-    <!---->
     <div class="content-page">
         <div class="container">
             <div class="category-featured Vegetables">
@@ -416,7 +286,8 @@
                                                     class="search fancybox-button"></a>
                                             </div>
                                             <div class="add-to-cart">
-                                                <a class="" title="Add to Cart"  ng-click="AddCart(x.maCamera,x.gia)" style="cursor: pointer;">Add to Cart</a>
+                                                <a class="" title="Add to Cart" id="{{x.maCamera}}" quantily="1" onclick="addToCart(this)" 
+                                                style="cursor: pointer;">Add to Cart</a>
                                             </div>
                                             <div class="bestseller"></div>
                                         </div>
@@ -608,129 +479,6 @@
     </div>
 
     <!--EN LOGIN REGISTER-->
-   
-    <!--PEOPLE SAY-->
-
-    <div id="owl-demo-ppsay">
-        <div class="container">
-            <div class="ppsay-title">CUSTOMER COMMENT</div>
-            <div id="customer-item-carousel" class="carousel slide hidden-sm hidden-xs" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#customer-item-carousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#customer-item-carousel" data-slide-to="1"></li>
-                    <li data-target="#customer-item-carousel" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner hidden-sm hidden-xs">
-                    <div class="item active">
-                        <div class="ppsaydiv">
-                            <div class="ppsaycontent hidden-xs col-sm-6 col-md-6">
-                                <div class="ppsayavt col-md-3 col-sm-3">
-                                    <img src="images/parallax-content2-2.png"" alt=" Ms. Huong Nguyen">
-                                </div>
-                                <div class="ppsayauthor col-md-9 col-sm-9">
-                                    <div class="ppsaycontentcmt">
-                                        <p style="text-align: justify"><span>“ </span>I am pleased with product quality
-                                            and service quality of Eco Shop. Best wishes to your shop. I hope that there
-                                            are more new best products and your service is always
-                                            sustainable.<span>”</span></p>
-                                    </div>
-                                    <p><span>Customer:</span> <span class="name">Ms. Huong Nguyen</span></p>
-                                </div>
-                            </div>
-                            <div class="ppsaycontent col-xs-12 col-sm-6 col-md-6">
-                                <div class="ppsayavt col-md-3 col-sm-3">
-                                    <img src="images/parallax-content.png" alt="Ms. Linh Pham">
-                                </div>
-                                <div class="ppsayauthor col-md-9 col-sm-9">
-                                    <div class="ppsaycontentcmt">
-                                        <p style="text-align: justify"><span>“ </span>I am so busy that I do not have
-                                            any time to go suppermarket. So that, buying food online is my best choice.
-                                            Your products are always fresh and delicious. I will continue buying foods
-                                            at your online shop. <span>”</span></p>
-                                    </div>
-                                    <p><span>Customer:</span> <span class="name">Ms. Linh Pham</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="ppsaydiv">
-                            <div class="ppsaycontent col-xs-12 col-sm-6 col-md-6">
-                                <div class="ppsayavt col-md-3 col-sm-3">
-                                    <img src="images/parallax-content2-2.png" alt="Ms. Hoang Tran">
-                                </div>
-                                <div class="ppsayauthor col-md-9 col-sm-9">
-                                    <div class="ppsaycontentcmt">
-                                        <p style="text-align: justify"><span>“ </span> I higly appreciate your product
-                                            quality and your service. I now truly believe in your brand. <span>”</span>
-                                        </p>
-                                    </div>
-                                    <p><span>Customer:</span> <span class="name">Ms. Hoang Tran</span></p>
-                                </div>
-                            </div>
-                            <div class="ppsaycontent col-xs-12 col-sm-6 col-md-6">
-                                <div class="ppsayavt col-md-3 col-sm-3">
-                                    <img src="images/parallax-content.png" alt="Ms. Thu Phan">
-                                </div>
-                                <div class="ppsayauthor col-md-9 col-sm-9">
-                                    <div class="ppsaycontentcmt">
-                                        <p><span style="text-align: justify">“ </span> I am a young mom and have to
-                                            work. It costs my time and money to access your website and buy products.
-                                            <span>”</span>
-                                        </p>
-                                    </div>
-                                    <p><span>Customer:</span> <span class="name">Ms.Thu Phan</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="ppsaydiv">
-                            <div class="ppsaycontent col-xs-12 col-sm-6 col-md-6">
-                                <div class="ppsayavt col-md-3 col-sm-3">
-                                    <img src="images/parallax-content-2.png" alt="Ms. Hoang Tran">
-                                </div>
-                                <div class="ppsayauthor col-md-9 col-sm-9">
-                                    <div class="ppsaycontentcmt">
-                                        <p style="text-align: justify"><span>“ </span>When I looked for natural and
-                                            organic shop, my friends introduced your shop to me. At the first time I
-                                            came your shop, I am so satisfactory because of your customer
-                                            care.<span>”</span></p>
-                                    </div>
-                                    <p><span>Customer:</span> <span class="name">Ms. Lan Tran</span></p>
-                                </div>
-                            </div>
-                            <div class="ppsaycontent col-xs-12 col-sm-6 col-md-6">
-                                <div class="ppsayavt col-md-3 col-sm-3">
-                                    <img src="images/parallax-content-1.png" alt="Ms. Trang Le">
-                                </div>
-                                <div class="ppsayauthor col-md-9 col-sm-9">
-                                    <div class="ppsaycontentcmt">
-                                        <p style="text-align: justify"><span>“ </span>Your staff are so friendly and
-                                            enthusiastic. Your shop is also clean and nice. Of course, your products are
-                                            best quality.<span>”</span></p>
-                                    </div>
-                                    <p><span>Customer:</span> <span class="name">Trang Le</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="customer-item-carousel" class="carousel slide hidden-md hidden-lg" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#customer-item-carousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#customer-item-carousel" data-slide-to="1"></li>
-                    <li data-target="#customer-item-carousel" data-slide-to="2"></li>
-                    <li data-target="#customer-item-carousel" data-slide-to="3"></li>
-                    <li data-target="#customer-item-carousel" data-slide-to="4"></li>
-                    <li data-target="#customer-item-carousel" data-slide-to="5"></li>
-                </ol>
-            </div>
-        </div>
-    </div>
-
-    <!--END PEOPLE SAY-->
 
     <!-- Footer -->
     <footer id="footer">
@@ -739,13 +487,13 @@
             <div id="introduce-box" class="row">
                 <div class="col-md-3">
                     <div id="address-box">
-                        <a href="#"><img src="images/logo.png" alt="logo" /></a>
+                        <a href="#"><img src="images/logo-vuhoangtelecom.svg" alt="logo" /></a>
 
                         <div id="address-list">
-                            <div class="tit-name">Address:</div>
+                            <div class="tit-name">Địa chỉ:</div>
                             <div class="tit-contain">999 Le Van Hien street, Ngu Hanh Son District, Danang city,
                                 Vietnam.</div>
-                            <div class="tit-name">Phone:</div>
+                            <div class="tit-name">Điện thoại:</div>
                             <div class="tit-contain">(+84) 511.3446.295</div>
                             <div class="tit-name">Email:</div>
                             <div class="tit-contain">ecoshop@gmail.com</div>
@@ -755,21 +503,21 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="introduce-title">CUSTOMER CARE</div>
+                            <div class="introduce-title">CHĂM SÓC KHÁCH HÀNG</div>
                             <ul id="introduce-support" class="introduce-list">
-                                <li> Mon - Fri: 7am to 8pm </li>
-                                <li>Sat & Sun: 7am to 6pm</li>
-                                <li><a href="policy-faq.html">How to Buy</a></li>
-                                <li><a href="policy-faq.html">How to Payment</a></li>
-                                <li><a href="policy-faq.html">FAQ</a></li>
+                                <li> Thứ Hai - Thứ Sáu: 7 giờ sáng đến 8 giờ tối </li>
+                                <li>T7 & CN: 7 giờ sáng đến 6 giờ chiều</li>
+                                <li><a href="policy-faq.html">Lam thê nao để mua</a></li>
+                                <li><a href="policy-faq.html">Cách thanh toán</a></li>
+                                <li><a href="policy-faq.html">Câu hỏi thường gặp</a></li>
                         </div>
                         <div class="col-sm-6">
-                            <div class="introduce-title">Policy</div>
+                            <div class="introduce-title">CHÍNH SÁCH</div>
                             <ul id="introduce-Account" class="introduce-list">
-                                <li><a href="policy-faq.html">Security Policy</a></li>
-                                <li><a href="policy-faq.html">Payment Policy</a></li>
-                                <li><a href="policy-faq.html">Return & Change Policy</a></li>
-                                <li><a href="policy-faq.html">Terms & Conditions</a></li>
+                                <li><a href="policy-faq.html">Chính sách bảo mật</a></li>
+                                <li><a href="policy-faq.html">Chính sách thanh toán</a></li>
+                                <li><a href="policy-faq.html">Chính sách đổi trả</a></li>
+                                <li><a href="policy-faq.html">Điều khoản và điều kiện</a></li>
                             </ul>
                         </div>
                     </div>
@@ -777,14 +525,14 @@
 
                 <div class="col-md-3">
                     <div id="contact-box">
-                        <div class="introduce-title">Subscribe to Eco Shop newsletter</div>
+                        <div class="introduce-title">ĐĂNG KÝ NHẬN BẢN TIN CỦA VŨ HOÀNG</div>
                         <div class="input-group" id="mail-box">
                             <input type="text" placeholder="Your email address" />
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">OK</button>
                             </span>
                         </div><!-- /input-group -->
-                        <div class="introduce-title">Follow Us</div>
+                        <div class="introduce-title">THEO CHÚNG TÔI</div>
                         <!--<div class="social-link">-->
                         <!--<a href="#"><i class="fa fa-facebook"></i></a>-->
                         <!--<a href="#"><i class="fa fa-pinterest-p"></i></a>-->
@@ -807,11 +555,6 @@
 
                 </div>
             </div><!-- /#introduce-box -->
-
-
-            <div id="footer-menu-box">
-                <p class="text-center">Copyrights &#169; 2016 Eco Shop. All Rights Reserved.</p>
-            </div><!-- /#footer-menu-box -->
         </div>
     </footer>
 

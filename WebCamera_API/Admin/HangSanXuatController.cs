@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebCamera_API.Areas
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/admin/[controller]")]
     [ApiController]
     public class HangSanXuatController : ControllerBase
