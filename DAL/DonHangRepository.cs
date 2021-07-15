@@ -70,6 +70,43 @@ namespace DAL
                 throw;
             }
         }
+        public DonHangList GetAllDonHang()
+        {
+            DonHangList listdh = new DonHangList();
+            List<DonHang> DonHangList = new List<DonHang>();
+                string sql = "sp_DonHang";
+                using (SqlConnection connection = new SqlConnection(dbconnectionStr))
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    connection.Open();
+                    using (SqlDataReader dataReader = command.ExecuteReader())
+                    {
+                        while (dataReader.Read())
+                        {
+                            DonHang DonHang = new DonHang();
+                            DonHang.MaDonHang = Convert.ToString(dataReader["MaDonHang"]);
+                            DonHang.TenKhachHang = Convert.ToString(dataReader["TenKhachHang"]);
+                            DonHang.DiaChi = Convert.ToString(dataReader["DiaChi"]);
+                            DonHang.SDT = Convert.ToString(dataReader["SDT"]);
+                            DonHang.NgayTao = Convert.ToString(dataReader["NgayTao"]);
+                            DonHang.GhiChu = Convert.ToString(dataReader["GhiChu"]);
+                            DonHang.TrangThaiDonHang = Convert.ToString(dataReader["TrangThaiDonHang"]);
+                            DonHang.TrangThaiVanChuyen = Convert.ToString(dataReader["TrangThaiVanChuyen"]);
+                            DonHang.TrangThaiThanhToan = Convert.ToString(dataReader["TrangThaiThanhToan"]);
+                            DonHang.TongTien = Convert.ToInt32(dataReader["TongTien"]);
+                            DonHangList.Add(DonHang);
+                        }
+                        dataReader.NextResult();
+                        while (dataReader.Read())
+                        {
+                            listdh.totalcount = Convert.ToInt32(dataReader["totalcount"]);
+                        }
+                        listdh.listDonHang = DonHangList;
+                    }
+                }
+            return listdh;
+        }
         public DonHangList GetDonHangChuaXacThuc(int Pageindex, int Pagesize)
         {
             DonHangList listdh = new DonHangList();
@@ -98,6 +135,7 @@ namespace DAL
                             DonHang.TrangThaiDonHang = Convert.ToString(dataReader["TrangThaiDonHang"]);
                             DonHang.TrangThaiVanChuyen = Convert.ToString(dataReader["TrangThaiVanChuyen"]);
                             DonHang.TrangThaiThanhToan = Convert.ToString(dataReader["TrangThaiThanhToan"]);
+                            DonHang.TongTien = Convert.ToInt32(dataReader["TongTien"]);
                             DonHangList.Add(DonHang);
                         }
                         dataReader.NextResult();
@@ -143,6 +181,7 @@ namespace DAL
                             DonHang.TrangThaiDonHang = Convert.ToString(dataReader["TrangThaiDonHang"]);
                             DonHang.TrangThaiVanChuyen = Convert.ToString(dataReader["TrangThaiVanChuyen"]);
                             DonHang.TrangThaiThanhToan = Convert.ToString(dataReader["TrangThaiThanhToan"]);
+                            DonHang.TongTien = Convert.ToInt32(dataReader["TongTien"]);
                             DonHangList.Add(DonHang);
                         }
                         dataReader.NextResult();
@@ -188,6 +227,53 @@ namespace DAL
                             DonHang.TrangThaiDonHang = Convert.ToString(dataReader["TrangThaiDonHang"]);
                             DonHang.TrangThaiVanChuyen = Convert.ToString(dataReader["TrangThaiVanChuyen"]);
                             DonHang.TrangThaiThanhToan = Convert.ToString(dataReader["TrangThaiThanhToan"]);
+                            DonHang.TongTien = Convert.ToInt32(dataReader["TongTien"]);
+                            DonHangList.Add(DonHang);
+                        }
+                        dataReader.NextResult();
+                        while (dataReader.Read())
+                        {
+                            listdh.totalcount = Convert.ToInt32(dataReader["totalcount"]);
+                        }
+                        listdh.listDonHang = DonHangList;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return listdh;
+        }
+        public DonHangList GetDonHangDaHuy(int Pageindex, int Pagesize)
+        {
+            DonHangList listdh = new DonHangList();
+            List<DonHang> DonHangList = new List<DonHang>();
+            try
+            {
+                string sql = "sp_page_DonHangDaHuy";
+                using (SqlConnection connection = new SqlConnection(dbconnectionStr))
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Pageindex", Pageindex);
+                    command.Parameters.AddWithValue("@Pagesize", Pagesize);
+                    connection.Open();
+                    using (SqlDataReader dataReader = command.ExecuteReader())
+                    {
+                        while (dataReader.Read())
+                        {
+                            DonHang DonHang = new DonHang();
+                            DonHang.MaDonHang = Convert.ToString(dataReader["MaDonHang"]);
+                            DonHang.TenKhachHang = Convert.ToString(dataReader["TenKhachHang"]);
+                            DonHang.DiaChi = Convert.ToString(dataReader["DiaChi"]);
+                            DonHang.SDT = Convert.ToString(dataReader["SDT"]);
+                            DonHang.NgayTao = Convert.ToString(dataReader["NgayTao"]);
+                            DonHang.GhiChu = Convert.ToString(dataReader["GhiChu"]);
+                            DonHang.TrangThaiDonHang = Convert.ToString(dataReader["TrangThaiDonHang"]);
+                            DonHang.TrangThaiVanChuyen = Convert.ToString(dataReader["TrangThaiVanChuyen"]);
+                            DonHang.TrangThaiThanhToan = Convert.ToString(dataReader["TrangThaiThanhToan"]);
+                            DonHang.TongTien = Convert.ToInt32(dataReader["TongTien"]);
                             DonHangList.Add(DonHang);
                         }
                         dataReader.NextResult();
@@ -221,11 +307,12 @@ namespace DAL
                     {
                         while (dataReader.Read())
                         {
-                            ChiTietDonHang CTHDN = new ChiTietDonHang();
-                            CTHDN.TenCamera = Convert.ToString(dataReader["TenCamera"]);
-                            CTHDN.SoLuong = Convert.ToInt32(dataReader["SoLuong"]);
-                            CTHDN.DonGia = Convert.ToInt32(dataReader["DonGia"]);
-                            ListChiTietDH.Add(CTHDN);
+                            ChiTietDonHang CTDH = new ChiTietDonHang();
+                            CTDH.TenCamera = Convert.ToString(dataReader["TenCamera"]);
+                            CTDH.SoLuong = Convert.ToInt32(dataReader["SoLuong"]);
+                            CTDH.DonGia = Convert.ToInt32(dataReader["DonGia"]);
+                            CTDH.HinhAnh = Convert.ToString(dataReader["HinhAnh"]);
+                            ListChiTietDH.Add(CTDH);
                         }
                     }
                 }
@@ -331,6 +418,29 @@ namespace DAL
                         cmd.Parameters.AddWithValue("@TrangThaiDonHang", dh.TrangThaiDonHang);
                         cmd.Parameters.AddWithValue("@TrangThaiVanChuyen", dh.TrangThaiVanChuyen);
                         cmd.Parameters.AddWithValue("@TrangThaiThanhToan", dh.TrangThaiThanhToan);
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public bool Restore_Order(string MaDonHang)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(dbconnectionStr))
+                {
+                    string sql = "RestoreOrder";
+                    using (SqlCommand cmd = new SqlCommand(sql, connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@MaDonHang", MaDonHang);
                         connection.Open();
                         cmd.ExecuteNonQuery();
                         connection.Close();

@@ -11,7 +11,7 @@ using BLL.Interfaces;
 
 namespace WebCamera_API.Admin
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/admin/[controller]")]
     [ApiController] 
     public class LoaiCameraController : ControllerBase

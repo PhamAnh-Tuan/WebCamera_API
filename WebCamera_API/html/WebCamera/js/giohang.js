@@ -8,7 +8,7 @@ function addToCart(item) {
         // debugger;    
         console.log(item.id);
         console.log($(item).parents().eq(2).find('.product-name').text());
-        console.log($(item).parents().eq(2).find('.price-product55').val());
+        console.log($(item).parents().eq(2).find('.price-product').val());
         console.log($(item).parents().eq(2).find('.img-responsive').attr('src'));
 
 
@@ -17,14 +17,15 @@ function addToCart(item) {
             name: $(item).parents().eq(2).find('.product-name').text(),
             quantily: 1,
             image: $(item).parents().eq(2).find('.img-responsive').attr('src'),
-            price: $(item).parents().eq(2).find('.price-product55').val()
+            price: $(item).parents().eq(2).find('.price-product').val()
         };
         console.log(cartitem);
 
         var listcart = [];
         if (localStorage.getItem('cart') == null) {
             listcart.push(cartitem);
-            localStorage.setItem('cart', JSON.stringify(listcart));showSuccessToast();
+            localStorage.setItem('cart', JSON.stringify(listcart));
+            showSuccessToast();
         }
         else {
             listcart = JSON.parse(localStorage.getItem('cart'));
@@ -104,6 +105,7 @@ function LoadData() {
     document.getElementById("cart__all").innerHTML = carthead;
     document.getElementById("cart-product").innerHTML = str;
     $("#total_num").text(total_all+' VNĐ');
+    CountCart();
     console.log(total_all);
 }
 function XoaCart() {
@@ -118,10 +120,7 @@ function Xoa(id) {
     LoadData();
     localStorage.setItem('cart', JSON.stringify(list));
 }
-function updateCart() {
-    localStorage.setItem('cart', JSON.stringify(list));
-    alert("Đã cập nhật thông tin giở hàng thành công");
-}
+
 function Tang(id) {
     var index = list.findIndex(x => x.id == id);
     if (index >= 0) {
@@ -138,12 +137,12 @@ function Giam(id) {
     }
     LoadData();
 }
-function updateQuantity(id) {
-    var quantity = Number($('#q_' + id).val());
-    var index = list.findIndex(x => x.id == id);
-    if (index >= 0 && list[index].quantily >= 1) {
-        list[index].quantily = quantily;
-    }
-    LoadData();
-}
 LoadData();
+function CountCart(){
+    var t = 0;
+    for (x of list) {
+        t+=x.quantily;
+    }
+    console.log(t);
+    $("#count-cart").text(t);
+}

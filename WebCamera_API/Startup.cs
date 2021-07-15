@@ -18,6 +18,7 @@ using DAL.Interfaces;
 using BLL.Interfaces;
 using DAL;
 using BLL;
+
 namespace WebCamera_API
 {
     public class Startup
@@ -82,7 +83,6 @@ namespace WebCamera_API
             });
             
             services.AddControllers();
-            
 
             services.AddTransient<IHangSanXuatRepository, HangSanXuatRepository>();
             services.AddTransient<IHangSanXuatBusiness, HangSanXuatBusiness>();
@@ -115,7 +115,7 @@ namespace WebCamera_API
             app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
-            
+
 
             app.UseEndpoints(endpoints =>
             {

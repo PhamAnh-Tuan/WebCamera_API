@@ -9,9 +9,11 @@ using Model;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 using BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebCamera_API.Admin
 {
+    [Authorize]
     [Route("api/admin/[controller]")]
     [ApiController]
     public class CameraController : ControllerBase
@@ -106,6 +108,7 @@ namespace WebCamera_API.Admin
         {
             return _camerabusiness.Update_Hot(MaCamera);
         }
+        //[AllowAnonymous]
         [Route("get-all")]
         [HttpGet]
         public List<Camera> GetAllCamera()

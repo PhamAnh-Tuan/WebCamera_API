@@ -14,14 +14,14 @@ app.controller("HomeClient", function ($rootScope, $scope, $http) {
         alert('failed');
     });
 
-    $http.get(current_url + "admin/LoaiCamera/get-menu").then(function (response) {
+    $http.get(current_url + "Home/get-menu").then(function (response) {
         $scope.listmenu = response.data;
     }, function (error) {
         alert('failed');
     });
     var html = "";
     var dd = "---";
-    $http.get(current_url + "admin/HangSanXuat/get-all").then(function (response) {
+    $http.get(current_url + "Home/gethang-all").then(function (response) {
         var data = response.data;
         var data2 = $scope.listmenu;
         for (var i = 0; i < data.length; i++) {
@@ -32,7 +32,6 @@ app.controller("HomeClient", function ($rootScope, $scope, $http) {
         }
 
         $("#selectma").html(html);
-        // console.log(html)
 
     }, function (error) {
         alert('failed');
@@ -137,14 +136,10 @@ app.controller("LoaisanphamController", function ($scope, $http, $location) {
     $http.get(current_url + "LoaiCamera/get-sp-maloai/" + $location.search().MaLoai).then(function (d) {
         if (d.data != null) {
             $scope.loaicamera = d.data;
-            // $scope.sort = function (keyname) {
-            //     $scope.sortKey = keyname;   //set the sortKey to the param passed
-            //     $scope.reverse = !$scope.reverse; //if true make it false and vice versa
-            // }
             $scope.Sort = function () {
                 key = $scope.keyname;
-                $scope.sortKey = key;   //set the sortKey to the param passed
-                $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+                $scope.sortKey = key;
+                $scope.reverse = !$scope.reverse; 
             }
             $scope.viewby = 8;
             $scope.totalItems = $scope.loaicamera.length;
@@ -171,14 +166,14 @@ app.controller("LoaisanphamController", function ($scope, $http, $location) {
         alert('failed');
     });
 
-    $http.get(current_url + "admin/LoaiCamera/get-menu").then(function (response) {
+    $http.get(current_url + "Home/get-menu").then(function (response) {
         $scope.listmenu = response.data;
     }, function (error) {
         alert('failed');
     });
     var html = "";
     var dd = "---";
-    $http.get(current_url + "admin/HangSanXuat/get-all").then(function (response) {
+    $http.get(current_url + "Home/gethang-all").then(function (response) {
         var data = response.data;
         var data2 = $scope.listmenu;
         for (var i = 0; i < data.length; i++) {
@@ -343,6 +338,16 @@ app.controller("GioHangController", function ($scope, $http) {
 });
 ///
 app.controller("PayController", function ($scope, $http, $rootScope) {
+    $scope.log = true;
+    if (localStorage.getItem("Client") != null) {
+        $scope.log = false;
+        $scope.tk = true;
+        var users = localStorage.getItem("Client");
+        var user = JSON.parse(users);
+        $scope.taikhoan = user.tenKhachHang;
+        console.log($scope.taikhoan);
+    }
+
 
     var users = localStorage.getItem("Client");
     var us = JSON.parse(users);
@@ -350,20 +355,12 @@ app.controller("PayController", function ($scope, $http, $rootScope) {
     console.log($scope.user);
 
     var list = JSON.parse(localStorage.getItem('cart'));
-
-    var listorder = "";
-    var n = 0;
     var t = 0;
 
-
-
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0');
-    var yyyy = today.getFullYear();
-    today = yyyy + '/' + mm + '/' + dd;
+    // 
     list_json = [];
-    var madon = 'DH' + $scope.user.maKhachHang + localStorage.getItem('maddh');
+    var madon = 'DH' + $scope.user.maKhachHang + Math.floor(Math.random() * 10000000);
+    console.log(madon);
     for (x of list) {
         var item = {
             MaDonHang: madon,
@@ -378,10 +375,8 @@ app.controller("PayController", function ($scope, $http, $rootScope) {
         $.each(list, function (key, value) {
             t += value.price * value.quantily;
         });
-        console.log(t);
-        var a = new Date();
-        var b = a.getTime();
-        localStorage.setItem('maddh', b);
+        // var a = new Date();
+        // var b = a.getTime();
         var currentdate = new Date();
         var datetime = currentdate.getMonth() + 1 + "/"
             + (currentdate.getDate()) + "/"
@@ -394,7 +389,7 @@ app.controller("PayController", function ($scope, $http, $rootScope) {
                 MaDonHang: madon,
                 MaKhachHang: $scope.user.maKhachHang,
                 NgayTao: datetime,
-                TrangThaiDonHang: 'Chưa xác nhận',
+                TrangThaiDonHang: 'Chưa xác thực',
                 TrangThaiVanChuyen: 'Chưa vận chuyển',
                 TrangThaiThanhToan: 'Chưa thanh toán',
                 TongTien: t,
@@ -403,7 +398,7 @@ app.controller("PayController", function ($scope, $http, $rootScope) {
                 SDT: $scope.user.sdt,
                 GhiChu: document.getElementById('delivery-payment-method').value
             }
-        }).then(function (trus) {   
+        }).then(function (trus) {     
             $.each(list, function (key, value) {
                 $http({
                     method: 'POST',
@@ -416,9 +411,9 @@ app.controller("PayController", function ($scope, $http, $rootScope) {
                     }
                 });
             })
-        }).then(function (d) {
+        }).then(function (d) { 
             localStorage.removeItem('cart');
-            showTitle('Chúc mừng bạn thanh toán thành công');
+            alert('Chúc mừng bạn thanh toán thành công');
             window.location.href = 'index.html';
         })
     };

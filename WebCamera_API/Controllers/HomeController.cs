@@ -17,9 +17,13 @@ namespace WebCamera_API.Controllers
     public class HomeController : ControllerBase
     {
         private ICameraBusiness _camerabusiness;
-        public HomeController(ICameraBusiness ICamera)
+        private IHangSanXuatBusiness _hsxbusiness;
+        private ILoaiCameraBusiness _lcamerabusiness;
+        public HomeController(ICameraBusiness ICamera,IHangSanXuatBusiness IHangsx,ILoaiCameraBusiness ILoai)
         {
             _camerabusiness = ICamera;
+            _hsxbusiness = IHangsx;
+            _lcamerabusiness = ILoai;
         }
         [Route("get-all")]
         [HttpGet]
@@ -43,6 +47,18 @@ namespace WebCamera_API.Controllers
         public List<Camera> Search_Product(string KeyWord)
         {
             return _camerabusiness.Search_Product(KeyWord);
+        }
+        [Route("gethang-all")]
+        [HttpGet]
+        public List<HangSanXuat> GetAllHang()
+        {
+            return _hsxbusiness.GetAllHang();
+        }
+        [Route("get-menu")]
+        [HttpGet]
+        public List<LoaiCamera> Get_MenuLoai()
+        {
+            return _lcamerabusiness.Get_MenuLoai();
         }
     }
 }

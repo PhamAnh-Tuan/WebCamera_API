@@ -18,6 +18,12 @@ namespace WebCamera_API.Admin
         {
             _donhangbusiness = DonHangBusiness;
         }
+        [Route("getall-donhang")]
+        [HttpGet]
+        public DonHangList GetAllDonHang()
+        {
+            return _donhangbusiness.GetAllDonHang();
+        }
         [Route("get-donhang-chuaxacthuc/{Pageindex}/{Pagesize}")]
         [HttpGet]
         public DonHangList GetDonHangChuaXacThuc(int Pageindex, int Pagesize)
@@ -35,6 +41,12 @@ namespace WebCamera_API.Admin
         public DonHangList GetDonHangDaGiao(int Pageindex, int Pagesize)
         {
             return _donhangbusiness.GetDonHangDaGiao(Pageindex, Pagesize);
+        }
+        [Route("get-donhang-dahuy/{Pageindex}/{Pagesize}")]
+        [HttpGet]
+        public DonHangList GetDonHangDaHuy(int Pageindex, int Pagesize)
+        {
+            return _donhangbusiness.GetDonHangDaHuy(Pageindex, Pagesize);
         }
         [Route("get-chitietdh/{MaDonHang}")]
         [HttpGet]
@@ -65,6 +77,12 @@ namespace WebCamera_API.Admin
         public bool SP_Get_ByID(DonHang dh)
         {
             return _donhangbusiness.Update_Status(dh);
+        }
+        [Route("restore/{MaDonHang}")]
+        [HttpGet]
+        public bool Restore_Order(string MaDonHang)
+        {
+            return _donhangbusiness.Restore_Order(MaDonHang);
         }
     }
 }

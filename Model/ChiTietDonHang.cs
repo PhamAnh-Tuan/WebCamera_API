@@ -12,5 +12,6 @@ namespace Model
         public string TenCamera { get; set; }
         public int SoLuong { get; set; }
         public int DonGia { get; set; }
+        public string HinhAnh { get; set; }
     }
 }

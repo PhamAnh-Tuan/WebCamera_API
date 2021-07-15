@@ -35,7 +35,7 @@ namespace WebCamera_API.Areas
         }
         [Route("create-hang")]
         [HttpPost]
-        public bool CreateHang(HangSanXuat hsx)
+        public bool CreateHang([FromBody] HangSanXuat hsx)
         {
             return _hsxbusiness.CreateHang(hsx);
         }

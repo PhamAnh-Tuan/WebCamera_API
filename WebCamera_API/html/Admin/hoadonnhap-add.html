@@ -438,19 +438,19 @@
                                                                         </tfoot>
                                                                     </table>
                                                                 </div>
-                                                            </div>                           
+                                                            </div>
                                                         </form>
                                                     </div>
                                                     <div class="card-block">
                                                         <div class="list-product">
 
                                                         </div>
-                                                        <div class="form-group row">                                   
+                                                        <div class="form-group row">
                                                             <div class="col-sm-9">
                                                             </div>
                                                             <div class="col-sm-3">
-                                                                <button class="btn btn-primary"
-                                                                onclick="AddBill()" style="float: right;">Thêm hóa đơn</button>
+                                                                <button class="btn btn-primary" onclick="AddBill()"
+                                                                    style="float: right;">Thêm hóa đơn</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -495,12 +495,18 @@
     <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script>
         $(document).ready(function () {
+            var user = JSON.parse(localStorage.getItem('user'));
             cart = [];
             $("#bntAdd").click(function () {
                 var prd;
                 var data = {};
                 $.ajax({
                     url: current_url + "Camera/get-all",
+                    headers: {
+                        "Authorization": 'Bearer ' + _user.token,
+                        'X-CSRF-TOKEN':'xxxxxxxxxxxxxxxxxxxx',
+                        'Content-Type':undefined
+                    },
                     type: 'GET',
                     success: function (res) {
                         prd = res;
@@ -614,13 +620,13 @@
                         type: "POST",
                         url: current_url + "HoaDonNhap/create-cthoadonnhap",
                         data: {
-                            'MaCTHoaDonNhap':'MCT' + Math.floor(Math.random() * 1000000),
-                            'MaHoaDonNhap':id,
-                            'MaCamera':value.id,
-                            'SoLuong':value.quantily,
-                            'DonGia':value.price
+                            'MaCTHoaDonNhap': 'MCT' + Math.floor(Math.random() * 1000000),
+                            'MaHoaDonNhap': id,
+                            'MaCamera': value.id,
+                            'SoLuong': value.quantily,
+                            'DonGia': value.price
                         }
-                    }).done(function(res){
+                    }).done(function (res) {
                         alert('thêm thành công');
                     })
                 })

@@ -1,6 +1,6 @@
 var _user = JSON.parse(localStorage.getItem("user"));
 var app = angular.module('myApp', ['ui.bootstrap']);
-app.controller('myCtrl', function ($scope, $http, $location) {
+app.controller('myCtrl', function ($scope, $http) {
         $scope.maxsize = 5;
 
         $scope.totalcount = 0;
@@ -12,14 +12,6 @@ app.controller('myCtrl', function ($scope, $http, $location) {
         $scope.searchText = '';
         //----------------------------------------------------------------------------------------------------------------
         $scope.HangSXLisst = function () {
-                console.log(_user)
-                // $http.get(current_url + "HangSanXuat/get-hang/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
-                //         $scope.listhang = response.data.listHang;
-                //         $scope.totalcount = response.data.totalcount;
-
-                // }, function (error) {
-                //         alert('Có lỗi xảy ra');
-                // });
                 $http({
                         method: 'GET',
                         headers: {
@@ -45,17 +37,6 @@ app.controller('myCtrl', function ($scope, $http, $location) {
         }
         // xóa hãng
         $scope.delete = function (id) {
-                // $http.get(current_url + "HangSanXuat/delete-hang/" + id).then(function (d) {
-                //         alert('xóa thành công');
-                //         $http.get(current_url + "HangSanXuat/get-hang/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
-                //                 $scope.listhang = response.data.listHang;
-                //                 $scope.totalcount = response.data.totalcount;
-                //         }, function (error) {
-                //                 alert('Có lỗi xảy ra');
-                //         });
-                // }, function (error) {
-                //         alert('Có lỗi xảy ra');
-                // });
                 $http({
                         method: 'GET',
                         headers: {
@@ -64,19 +45,7 @@ app.controller('myCtrl', function ($scope, $http, $location) {
                         url: current_url + "HangSanXuat/delete-hang/" + id
                 }).then(function (response) {
                         alert('xóa thành công');
-                        $http({
-                                method: 'GET',
-                                headers: {
-                                        "Authorization": 'Bearer ' + _user.token
-                                },
-                                url: current_url + "HangSanXuat/get-hang/" + $scope.pageIndex + "/" + $scope.pageSize
-                        }).then(function (response) {
-                                $scope.listhang = response.data.listHang;
-                                $scope.totalcount = response.data.totalcount;
-        
-                        }, function (e) {
-                                alert('Có lỗi xảy ra');
-                        });
+                        $scope.HangSXLisst();
                 }, function (e) {
                         alert('Có lỗi xảy ra');
                 });
@@ -93,7 +62,6 @@ app.controller('myCtrl', function ($scope, $http, $location) {
                         url: current_url + 'HangSanXuat/create-hang'
                 }).then(function (d) {
                         alert("Thêm thành công");
-                        // showTitle('Thêm thành công');
                         window.location.href = 'hangsanxuat-index.html';
 
                 }, function (e) {
@@ -102,16 +70,22 @@ app.controller('myCtrl', function ($scope, $http, $location) {
         }
 });
 app.controller('edit', function ($scope, $http, $location) {
-        $http.get(current_url + "HangSanXuat/get-byid-hang/" + $location.search().MaHang).then(function (d) {
+        $http({
+                method: 'GET',
+                headers: {
+                        "Authorization": 'Bearer ' + _user.token
+                },
+                url: current_url + "HangSanXuat/get-byid-hang/" + $location.search().MaHang
+        }).then(function (d) {
                 $scope.hangsx = d.data;
                 console.log($scope.hangsx);
                 $("#MaHang1").val(d.data.maHang);
                 $("#TenHang1").val(d.data.tenHang);
                 $("#ThongTin1").val(d.data.thongTin);
-        }, function (error) {
+
+        }, function (e) {
                 alert('Có lỗi xảy ra');
         });
-
         $scope.update = function () {
                 var object1 = {
                         "MaHang": ~~$("#MaHang1").val(),
@@ -135,7 +109,7 @@ app.controller('edit', function ($scope, $http, $location) {
 
         }
 });
-
+//
 app.controller('loaicamera', function ($scope, $http) {
         $scope.maxsize = 5;
 
@@ -147,12 +121,17 @@ app.controller('loaicamera', function ($scope, $http) {
 
         $scope.searchText = '';
         $scope.LoaiLisst = function () {
-
-                $http.get(current_url + "LoaiCamera/get-loai/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                $http({
+                        method: 'GET',
+                        headers: {
+                                "Authorization": 'Bearer ' + _user.token
+                        },
+                        url: current_url + "LoaiCamera/get-loai/" + $scope.pageIndex + "/" + $scope.pageSize
+                }).then(function (response) {
                         $scope.listLoai = response.data.listLoai;
                         $scope.totalcount = response.data.totalcount;
 
-                }, function (error) {
+                }, function (e) {
                         alert('Có lỗi xảy ra');
                 });
         }
@@ -168,15 +147,27 @@ app.controller('loaicamera', function ($scope, $http) {
         }
 
         $scope.delete = function (id) {
-                $http.get(current_url + "LoaiCamera/delete-loai/" + id).then(function (d) {
+                $http({
+                        method: 'GET',
+                        headers: {
+                                "Authorization": 'Bearer ' + _user.token
+                        },
+                        url: current_url + "LoaiCamera/delete-loai/" + id
+                }).then(function (response) {
                         alert('xóa thành công');
-                        $http.get(current_url + "LoaiCamera/get-loai/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                        $http({
+                                method: 'GET',
+                                headers: {
+                                        "Authorization": 'Bearer ' + _user.token
+                                },
+                                url: current_url + "LoaiCamera/get-loai/" + $scope.pageIndex + "/" + $scope.pageSize
+                        }).then(function (response) {
                                 $scope.listLoai = response.data.listLoai;
                                 $scope.totalcount = response.data.totalcount;
-                        }, function (error) {
+                        }, function (e) {
                                 alert('Có lỗi xảy ra');
                         });
-                }, function (error) {
+                }, function (e) {
                         alert('Có lỗi xảy ra');
                 });
 
@@ -190,40 +181,70 @@ app.controller('loaicamera', function ($scope, $http) {
                         "MoTa": $scope.MoTa,
                 }
                 console.log(formdata)
+
                 $http({
                         method: 'POST',
+                        headers: {
+                                "Authorization": 'Bearer ' + _user.token
+                        },
                         url: current_url + 'LoaiCamera/create-loai',
                         data: formdata
-                }).then(function (response) {
-                        alert('Thêm thành công..');
+                }).then(function (d) {
+                        alert("Thêm thành công");
+                        // showTitle('Thêm thành công');
                         window.location.href = 'loai-index.html';
-                }, function () {
-                        alert('Thêm thất bại');
+
+                }, function (e) {
+                        console.log('Thêm thất bại');
                 });
 
         }
         //
-        $http.get(current_url + "HangSanXuat/get-all").then(function (response) {
+
+        $http({
+                method: 'GET',
+                headers: {
+                        "Authorization": 'Bearer ' + _user.token
+                },
+                url: current_url + "HangSanXuat/get-all"
+        }).then(function (response) {
                 $scope.listhang = response.data;
-        }, function (error) {
+        }, function (e) {
                 alert('Có lỗi xảy ra');
         });
+
 });
 app.controller('edit-loai', function ($scope, $http, $location) {
-        $http.get(current_url + "LoaiCamera/get-byid-loai/" + $location.search().MaLoai).then(function (d) {
-                $scope.loai = d.data;
-        }, function (error) {
+        $http({
+                method: 'GET',
+                headers: {
+                        "Authorization": 'Bearer ' + _user.token
+                },
+                url: current_url + "LoaiCamera/get-byid-loai/" + $location.search().MaLoai
+        }).then(function (response) {
+                $scope.loai = response.data;
+        }, function (e) {
                 alert('Có lỗi xảy ra');
         });
-        $http.get(current_url + "HangSanXuat/get-all").then(function (response) {
-                $scope.listhang = response.data;
 
-        }, function (error) {
+        $http({
+                method: 'GET',
+                headers: {
+                        "Authorization": 'Bearer ' + _user.token
+                },
+                url: current_url + "HangSanXuat/get-all"
+        }).then(function (response) {
+                $scope.listhang = response.data;
+        }, function (e) {
                 alert('Có lỗi xảy ra');
         });
+
         $scope.update = function () {
                 $http({
                         method: 'POST',
+                        headers: {
+                                "Authorization": 'Bearer ' + _user.token
+                        },
                         url: current_url + 'LoaiCamera/update-loai',
                         data: {
                                 MaLoai: ~~$scope.loai.maLoai,
@@ -235,12 +256,12 @@ app.controller('edit-loai', function ($scope, $http, $location) {
                         alert("Cập nhật thành công");
                         window.location.href = 'loai-index.html'
                 }, function (e) {
-                        console.log(e);
+                        console.log('Cập nhật thất bại');
                 });
 
         }
 });
-
+//
 app.controller('camera', function ($scope, $http, $location) {
         $scope.maxsize = 5;
 
@@ -251,43 +272,63 @@ app.controller('camera', function ($scope, $http, $location) {
         $scope.pageSize = 5;
 
         $scope.searchText = '';
-        $scope.LoaiLisst = function () {
-                $http.get(current_url + "Camera/get-camera/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+        $scope.CameraList = function () {
+                $http({
+                        method: 'GET',
+                        headers: {
+                                "Authorization": 'Bearer ' + _user.token
+                        },
+                        url: current_url + "Camera/get-camera/" + $scope.pageIndex + "/" + $scope.pageSize
+                }).then(function (response) {
                         $scope.listCamera = response.data.listCamera;
                         $scope.totalcount = response.data.totalcount;
-
-                }, function (error) {
+                }, function (e) {
                         alert('Có lỗi xảy ra');
                 });
         }
-        $scope.LoaiLisst();
+        $scope.CameraList();
         $scope.pagechangeds = function () {
 
-                $scope.LoaiLisst();
+                $scope.CameraList();
 
         }
         $scope.changePageSizes = function () {
                 $scope.pageIndex = 1;
-                $scope.LoaiLisst();
+                $scope.CameraList();
         }
 
         $scope.delete = function (id) {
-                $http.get(current_url + "Camera/delete-camera/" + id).then(function (d) {
+                $http({
+                        method: 'GET',
+                        headers: {
+                                "Authorization": 'Bearer ' + _user.token
+                        },
+                        url: current_url + "Camera/delete-camera/" + id
+                }).then(function (response) {
                         alert('xóa thành công');
-                        $http.get(current_url + "Camera/get-camera/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                        $http({
+                                method: 'GET',
+                                headers: {
+                                        "Authorization": 'Bearer ' + _user.token
+                                },
+                                url: current_url + "Camera/get-camera/" + $scope.pageIndex + "/" + $scope.pageSize
+                        }).then(function (response) {
                                 $scope.listCamera = response.data.listCamera;
                                 $scope.totalcount = response.data.totalcount;
-                        }, function (error) {
+
+                        }, function (e) {
                                 alert('Có lỗi xảy ra');
                         });
-                }, function (error) {
+                }, function (e) {
                         alert('Có lỗi xảy ra');
                 });
-
         };
         $scope.updatehot = function (id) {
                 $http({
                         method: 'POST',
+                        headers: {
+                                "Authorization": 'Bearer ' + _user.token
+                        },
                         url: current_url + 'Camera/update-hot/' + id
                 }).then(function (response) {
                         alert('Cập nhật hot thành công..');
@@ -298,17 +339,31 @@ app.controller('camera', function ($scope, $http, $location) {
 
         };
         //
-        $http.get(current_url + "LoaiCamera/get-menu").then(function (response) {
+        $http({
+                method: 'GET',
+                headers: {
+                        "Authorization": 'Bearer ' + _user.token
+                },
+                url: current_url + "LoaiCamera/get-menu"
+        }).then(function (response) {
                 $scope.listmenu = response.data;
                 $scope.listmenuHang = removeDumplicateValue(response.data);
-        }, function (error) {
+        }, function (e) {
                 alert('Có lỗi xảy ra');
         });
+
+
         var html = "";
         var dd = "|---";
-        $http.get(current_url + "HangSanXuat/get-all").then(function (response) {
+        $http({
+                method: 'GET',
+                headers: {
+                        "Authorization": 'Bearer ' + _user.token
+                },
+                url: current_url + "HangSanXuat/get-all"
+        }).then(function (response) {
                 var data = response.data;
-                // 
+
                 var data2 = $scope.listmenu;
                 html += `<select id="MaLoai">`;
                 for (var i = 0; i < data.length; i++) {
@@ -321,9 +376,10 @@ app.controller('camera', function ($scope, $http, $location) {
 
                 $("#selectma").html(html)
                 console.log(html)
-        }, function (error) {
+        }, function (e) {
                 alert('Có lỗi xảy ra');
         });
+
 
         function childmenu(data, j) {
                 var idChildMenu = [];
@@ -412,29 +468,47 @@ app.controller('camera', function ($scope, $http, $location) {
         };
 });
 app.controller('edit-camera', function ($scope, $http, $location) {
-        $http.get(current_url + "Camera/get-byid-camera/" + $location.search().MaCamera).then(function (d) {
-                $scope.camera = d.data;
+        $http({
+                method: 'GET',
+                headers: {
+                        "Authorization": 'Bearer ' + _user.token
+                },
+                url: current_url + "Camera/get-byid-camera/" + $location.search().MaCamera
+        }).then(function (response) {
+                $scope.camera = response.data;
                 console.log($scope.camera);
-        }, function (error) {
+        }, function (e) {
                 alert('Có lỗi xảy ra');
         });
 
-        $http.get(current_url + "LoaiCamera/get-menu").then(function (response) {
+        $http({
+                method: 'GET',
+                headers: {
+                        "Authorization": 'Bearer ' + _user.token
+                },
+                url: current_url + "LoaiCamera/get-menu"
+        }).then(function (response) {
                 $scope.listmenu = response.data;
                 $scope.listmenuHang = removeDumplicateValue(response.data);
-        }, function (error) {
+        }, function (e) {
                 alert('Có lỗi xảy ra');
         });
 
         var html = "";
         var dd = "---";
-        $http.get(current_url + "HangSanXuat/get-all").then(function (response) {
+
+        $http({
+                method: 'GET',
+                headers: {
+                        "Authorization": 'Bearer ' + _user.token
+                },
+                url: current_url + "HangSanXuat/get-all"
+        }).then(function (response) {
                 var data = response.data;
                 // 
                 var data2 = $scope.listmenu;
                 var ml = $scope.camera.maLoai;
-                html += `<select id="MaLoai"><option value="${ml}" selected>` + $scope.camera.tenLoai + `</option>`;
-                // var html = `<select id="MaLoai"><option></option>`;
+                html += `<select id="MaLoai" class="form-control ng-pristine ng-valid ng-not-empty ng-touched"><option value="${ml}" selected>` + $scope.camera.tenLoai + `</option>`;
                 for (var i = 0; i < data.length; i++) {
                         html += "<option>";
                         html += data[i].tenHang;
@@ -445,8 +519,7 @@ app.controller('edit-camera', function ($scope, $http, $location) {
 
                 $("#selectma").html(html)
                 console.log(html)
-
-        }, function (error) {
+        }, function (e) {
                 alert('Có lỗi xảy ra');
         });
 
@@ -454,7 +527,7 @@ app.controller('edit-camera', function ($scope, $http, $location) {
                 var idChildMenu = []; // reset sau mỗi lần lặp
                 var nameChildMenu = []; // reset sau mỗi lần lặp
                 for (var i = 0; i < data.length; i++) {
-                        if (data[i].parent_MaHang == j) {
+                        if (data[i].maHang == j) {
                                 idChildMenu.push(data[i].maLoai);
                                 nameChildMenu.push(data[i].tenLoai);
                         }
@@ -463,7 +536,6 @@ app.controller('edit-camera', function ($scope, $http, $location) {
                 if (idChildMenu.length > 0) {
                         if (idChildMenu.length > 0) {
                                 for (var k = 0; k < idChildMenu.length; k++) {
-                                        // dd += "---";
                                         var a = idChildMenu[k];
                                         html += `<option value="${a}">`;
                                         html += dd;
@@ -544,6 +616,7 @@ app.controller('edit-camera', function ($scope, $http, $location) {
                 }
         }
 });
+//
 app.controller('nhacungcap', function ($scope, $http, $location) {
         $scope.maxsize = 5;
 
@@ -632,6 +705,7 @@ app.controller('edit-nhacungcap', function ($scope, $http, $location) {
 
         }
 });
+//
 app.controller('hoadonnhap', function ($scope, $http, $location) {
         $scope.maxsize = 5;
 
@@ -742,7 +816,7 @@ app.controller('donhang', function ($scope, $http, $location) {
 
         $scope.searchText = '';
         //----------------------------------------------------------------------------------------------------------------
-        $scope.OrerNotComfirm = function () {
+        $scope.OderNotComfirm = function () {
                 $http.get(current_url + "DonHang/get-donhang-chuaxacthuc/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
                         $scope.listdh = response.data.listDonHang;
                         $scope.totalcount = response.data.totalcount;
@@ -752,21 +826,20 @@ app.controller('donhang', function ($scope, $http, $location) {
                         alert('Có lỗi xảy ra');
                 });
         }
-        $scope.OrerNotComfirm();
-        $scope.pagechanged = function () {
-                $scope.OrerNotComfirm();
+        $scope.OderNotComfirm();
+        $scope.pagechangeds = function () {
+                $scope.OderNotComfirm();
 
         }
-        $scope.changePageSize = function () {
+        $scope.changePageSizes = function () {
                 $scope.pageIndex = 1;
-                $scope.OrerNotComfirm();
+                $scope.OderNotComfirm();
         }
         //
         $scope.OrerComfirm = function () {
                 $http.get(current_url + "DonHang/get-donhang-daxacthuc/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
                         $scope.ordcomfirm = response.data.listDonHang;
                         $scope.totalcount = response.data.totalcount;
-                        console.log($scope.orcomfirm);
 
                 }, function (error) {
                         alert('Có lỗi xảy ra');
@@ -801,6 +874,27 @@ app.controller('donhang', function ($scope, $http, $location) {
                 $scope.pageIndex = 1;
                 $scope.OrerDelivered();
         }
+
+        // 
+        $scope.OrerDestroy = function () {
+                $http.get(current_url + "DonHang/get-donhang-dahuy/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                        $scope.orddestroy = response.data.listDonHang;
+                        $scope.totalcount = response.data.totalcount;
+                        console.log($scope.listdh);
+
+                }, function (error) {
+                        alert('Có lỗi xảy ra');
+                });
+        }
+        $scope.OrerDestroy();
+        $scope.pagechanged = function () {
+                $scope.OrerDestroy();
+
+        }
+        $scope.changePageSize = function () {
+                $scope.pageIndex = 1;
+                $scope.OrerDestroy();
+        }
         //
         $scope.comfirm = function (id) {
                 $http.get(current_url + "DonHang/xacthuc/" + id).then(function (d) {
@@ -830,7 +924,19 @@ app.controller('donhang', function ($scope, $http, $location) {
                 }, function (error) {
                         alert('Có lỗi xảy ra');
                 });
-
+        };
+        $scope.restore = function (id) {
+                $http.get(current_url + "DonHang/restore/" + id).then(function (d) {
+                        alert('Khôi phục thành công');
+                        $http.get(current_url + "DonHang/get-donhang-dahuy/" + $scope.pageIndex + "/" + $scope.pageSize).then(function (response) {
+                                $scope.orddestroy = response.data.listDonHang;
+                                $scope.totalcount = response.data.totalcount;
+                        }, function (error) {
+                                alert('Có lỗi xảy ra');
+                        });
+                }, function (error) {
+                        alert('Có lỗi xảy ra');
+                });
         };
 });
 app.controller('trangthaidonhang', function ($scope, $http, $location) {
@@ -860,17 +966,51 @@ app.controller('trangthaidonhang', function ($scope, $http, $location) {
         }
 });
 app.controller('thongke', function ($scope, $http) {
-        $http.get(current_url + "HangSanXuat/get-all").then(function (response) {
+        $http({
+                method: "GET",
+                headers: {
+                        "Authorization": 'Bearer ' + _user.token
+                },
+                url: current_url + "HangSanXuat/get-all"
+        }).then(function (response) {
                 $scope.hangsx = response.data;
-                console.log(response.data);
-        }, function (error) {
-                alert('Có lỗi xảy ra');
-        });
-        $http.get(current_url + "LoaiCamera/get-menu").then(function (response) {
+        })
+        $http({
+                method: "GET",
+                headers: {
+                        "Authorization": 'Bearer ' + _user.token
+                },
+                url: current_url + "LoaiCamera/get-menu"
+        }).then(function (response) {
                 $scope.listmenu = response.data;
-        }, function (error) {
-                alert('Có lỗi xảy ra');
-        });
+        })
+        $http({
+                method: "GET",
+                url: current_url + "DonHang/getall-donhang"
+        }).then(function (response) {
+                $scope.donhang = response.data.listDonHang;
+                var obj = $scope.donhang;
+                console.log(obj);
+
+                $.each(obj, function (key, value) {
+                        var t = 0;                       
+                        if (value.trangThaiDonHang === "Chưa xác thực") {
+                                t += 1;
+                                console.log(t);
+                                $scope.countnotcf = t;
+                        }
+
+                });
+                $.each(obj, function (key, value) {
+                        var total = 0;
+                        if (value.trangThaiThanhToan === "Đã thanh toán") {
+                                total += value.tongTien;
+                                console.log(total);
+                                $scope.totalall = total;
+                        }
+                });
+        })
+
 });
 function removeDumplicateValue(myArray) {
         var newArray = [];
