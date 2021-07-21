@@ -108,7 +108,6 @@ namespace WebCamera_API.Admin
         {
             return _camerabusiness.Update_Hot(MaCamera);
         }
-        //[AllowAnonymous]
         [Route("get-all")]
         [HttpGet]
         public List<Camera> GetAllCamera()
